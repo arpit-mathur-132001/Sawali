@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://arpit132001:arpit132001@cluster0.cioeghl.mongodb.net/?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000",
+  "GOOGLE_CLIENT_ID": "866922509519-l5f6admkiq9g70s18e1vehr8dutinsjf.apps.googleusercontent.com",
+  "GOOGLE_CLIENT_SECRET": "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"
+}

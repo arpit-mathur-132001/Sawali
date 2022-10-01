@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Memory Cards</title>
+  </head>
+  <body>
+    <a href="/auth/logout" id="google-out">
+      <button class="btn-logout" type="submit">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </a>
+
+    <form action="/api/clear" method="POST">
+      <button id="clear" class="clear btn" type="submit">
+        <i class="fas fa-trash"></i> Clear Cards
+      </button>
+    </form>
+
+    <h1>
+      Memory Cards
+      <button id="show" class="btn btn-small">
+        <i class="fas fa-plus"></i> Add New Card
+      </button>
+    </h1>
+    <div id="cards-container" class="cards">
+      <!-- <div class="card active">
+        <div class="inner-card">
+          <div class="inner-card-front">
+            <p>
+              What is PHP?
+            </p>
+          </div>
+          <div class="inner-card-back">
+            <p>
+              A programming language
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="inner-card">
+          <div class="inner-card-front">
+            <p>
+              What is PHP?
+            </p>
+          </div>
+          <div class="inner-card-back">
+            <p>
+              A programming language
+            </p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="navigation">
+      <button id="prev" class="nav-button">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+
+      <p id="current"></p>
+
+      <button id="next" class="nav-button">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+
+      <form method="POST" id="deleteForm">
+        <button
+          id="delete"
+          class="btn btn-small"
+          type="button"
+          onclick="proceed();"
+        >
+          <i class="fas fa-trash"></i>
+        </button>
+      </form>
+    </div>
+
+    <div id="add-container" class="add-container">
+      <h1>
+        Add New Card
+        <button id="hide" class="btn btn-small btn-ghost">
+          <i class="fas fa-times"></i>
+        </button>
+      </h1>
+
+      <form action="/api/note" method="POST">
+        <div class="form-group">
+          <label for="question">Question</label>
+          <textarea placeholder="Enter question..." name="ques"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="answer">Answer</label>
+          <textarea placeholder="Enter Answer..." name="ans"></textarea>
+        </div>
+
+        <button id="add-card" class="btn" type="submit">
+          <i class="fas fa-plus"></i> Add Card
+        </button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    let notes = `<%- JSON.stringify(notes) %>`;
+
+    notes = JSON.parse(notes);
+
+    let currentActiveCard = 0;
+
+    const cardsContainer = document.getElementById("cards-container");
+    const currentEl = document.getElementById("current");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const showBtn = document.getElementById("show");
+    const hideBtn = document.getElementById("hide");
+    const addContainer = document.getElementById("add-container");
+    const addCardBtn = document.getElementById("add-card");
+    const clearBtn = document.getElementById("clear");
+
+    // Store DOM cards
+    const cardsEl = [];
+
+    // Create all cards
+    function createCards() {
+      for (let i = 0; i < notes.length; i++) {
+        createCard(notes[i], i);
+      }
+    }
+
+    // Create a single card in DOM
+    function createCard(note, index) {
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      if (index === 0) {
+        card.classList.add("active");
+      }
+
+      card.innerHTML = `
+      <div class="inner-card">
+        <div class="inner-card-front">
+          <p>
+            ${note.question}
+          </p>
+        </div>
+        <div class="inner-card-back">
+          <p>
+            ${note.answer}
+          </p>
+        </div>
+      </div>
+      `;
+
+      card.addEventListener("click", () =>
+        card.classList.toggle("show-answer")
+      );
+
+      // Add to DOM cards
+      cardsEl.push(card);
+
+      cardsContainer.appendChild(card);
+
+      updateCurrentText();
+    }
+
+    // Show number of cards
+    function updateCurrentText() {
+      currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
+    }
+
+    createCards();
+
+    // Event listeners
+
+    // Next button
+    nextBtn.addEventListener("click", () => {
+      cardsEl[currentActiveCard].className = "card left";
+
+      currentActiveCard = currentActiveCard + 1;
+
+      if (currentActiveCard > cardsEl.length - 1) {
+        currentActiveCard = cardsEl.length - 1;
+      }
+
+      cardsEl[currentActiveCard].className = "card active";
+
+      updateCurrentText();
+    });
+
+    // Prev button
+    prevBtn.addEventListener("click", () => {
+      cardsEl[currentActiveCard].className = "card right";
+
+      currentActiveCard = currentActiveCard - 1;
+
+      if (currentActiveCard < 0) {
+        currentActiveCard = 0;
+      }
+
+      cardsEl[currentActiveCard].className = "card active";
+
+      updateCurrentText();
+    });
+
+    // Show add container
+    showBtn.addEventListener("click", () => addContainer.classList.add("show"));
+    // Hide add container
+    hideBtn.addEventListener("click", () =>
+      addContainer.classList.remove("show")
+    );
+
+    // Add new card
+    addCardBtn.addEventListener("click", () => {
+      const question = questionEl.value;
+      const answer = answerEl.value;
+
+      if (question.trim() && answer.trim()) {
+        const newCard = { question, answer };
+
+        createCard(newCard);
+
+        questionEl.value = "";
+        answerEl.value = "";
+
+        addContainer.classList.remove("show");
+
+        cardsData.push(newCard);
+        setCardsData(cardsData);
+      }
+    });
+
+    function proceed() {
+      let form = document.getElementById("deleteForm");
+      form.setAttribute(
+        "action",
+        `/api/delete/${notes[currentActiveCard]._id}`
+      );
+      form.submit();
+    }
+  </script>
+</html>

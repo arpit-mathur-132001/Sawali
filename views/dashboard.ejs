@@ -28,8 +28,11 @@
     </form>
 
     <h1>
+      <button id="show2" class="btn btn-small btn1">
+        <i class="fas fa-edit"></i> Update This Card
+      </button>
       Cheat Code
-      <button id="show" class="btn btn-small">
+      <button id="show1" class="btn btn-small btn2">
         <i class="fas fa-plus"></i> Add New Card
       </button>
     </h1>
@@ -83,15 +86,15 @@
           type="button"
           onclick="proceed();"
         >
-          <i class="fas fa-trash"></i>
+          <i class="fas fa-trash"></i> Delete This Card
         </button>
       </form>
     </div>
 
-    <div id="add-container" class="add-container">
+    <div id="add-container1" class="add-container">
       <h1>
         Add New Card
-        <button id="hide" class="btn btn-small btn-ghost">
+        <button id="hideAdd" class="btn btn-small btn-ghost">
           <i class="fas fa-times"></i>
         </button>
       </h1>
@@ -112,6 +115,34 @@
         </button>
       </form>
     </div>
+
+    <div id="add-container2" class="add-container">
+      <h1>
+        Update This Card
+        <button id="hideUpdate" class="btn btn-small btn-ghost">
+          <i class="fas fa-times"></i>
+        </button>
+      </h1>
+
+      <form method="POST" id="updateForm">
+        <div class="form-group" id="q">
+          <label for="question">Question</label>
+        </div>
+
+        <div class="form-group" id="a">
+          <label for="answer">Answer</label>
+        </div>
+
+        <button
+          id="update-card"
+          class="btn"
+          type="button"
+          onclick="proceedUpdate();"
+        >
+          <i class="fas fa-edit"></i> Update Card
+        </button>
+      </form>
+    </div>
   </body>
 
   <script>
@@ -125,20 +156,57 @@
     const currentEl = document.getElementById("current");
     const prevBtn = document.getElementById("prev");
     const nextBtn = document.getElementById("next");
-    const showBtn = document.getElementById("show");
-    const hideBtn = document.getElementById("hide");
-    const addContainer = document.getElementById("add-container");
+    const showBtn1 = document.getElementById("show1");
+    const showBtn2 = document.getElementById("show2");
+    const hideAddBtn = document.getElementById("hideAdd");
+    const hideUpdateBtn = document.getElementById("hideUpdate");
+    const addContainer1 = document.getElementById("add-container1");
+    const addContainer2 = document.getElementById("add-container2");
     const addCardBtn = document.getElementById("add-card");
+    const updateCardBtn = document.getElementById("update-card");
     const clearBtn = document.getElementById("clear");
+    const q = document.getElementById("q");
+    const a = document.getElementById("a");
 
     // Store DOM cards
     const cardsEl = [];
+    const quesEl = [];
+    const ansEl = [];
 
     // Create all cards
     function createCards() {
       for (let i = 0; i < notes.length; i++) {
         createCard(notes[i], i);
+        updateCard(notes[i], i);
       }
+    }
+
+    // Update card
+    function updateCard(note, index) {
+      const ques = document.createElement("textarea");
+      ques.classList.add("ques");
+      ques.innerHTML = `${note.question}`;
+      ques.id = "ques";
+      ques.name = "ques";
+      ques.placeholder = "Enter Question...";
+      q.appendChild(ques);
+
+      const ans = document.createElement("textarea");
+      ans.classList.add("ans");
+      ans.innerHTML = `${note.answer}`;
+      ans.id = "ans";
+      ans.name = "ans";
+      ans.placeholder = "Enter Answer...";
+      a.appendChild(ans);
+
+      if (index === 0) {
+        ques.classList.add("active");
+        ans.classList.add("active");
+      }
+
+      // Update to DOM cards
+      quesEl.push(ques);
+      ansEl.push(ans);
     }
 
     // Create a single card in DOM
@@ -189,6 +257,8 @@
     // Next button
     nextBtn.addEventListener("click", () => {
       cardsEl[currentActiveCard].className = "card left";
+      quesEl[currentActiveCard].classList = "ques";
+      ansEl[currentActiveCard].classList = "ans";
 
       currentActiveCard = currentActiveCard + 1;
 
@@ -197,6 +267,8 @@
       }
 
       cardsEl[currentActiveCard].className = "card active";
+      quesEl[currentActiveCard].className = "ques active";
+      ansEl[currentActiveCard].className = "ans active";
 
       updateCurrentText();
     });
@@ -204,6 +276,8 @@
     // Prev button
     prevBtn.addEventListener("click", () => {
       cardsEl[currentActiveCard].className = "card right";
+      quesEl[currentActiveCard].classList = "ques";
+      ansEl[currentActiveCard].classList = "ans";
 
       currentActiveCard = currentActiveCard - 1;
 
@@ -212,42 +286,46 @@
       }
 
       cardsEl[currentActiveCard].className = "card active";
+      quesEl[currentActiveCard].className = "ques active";
+      ansEl[currentActiveCard].className = "ans active";
 
       updateCurrentText();
     });
 
     // Show add container
-    showBtn.addEventListener("click", () => addContainer.classList.add("show"));
-    // Hide add container
-    hideBtn.addEventListener("click", () =>
-      addContainer.classList.remove("show")
+    showBtn1.addEventListener("click", () =>
+      addContainer1.classList.add("show")
     );
 
-    // Add new card
-    addCardBtn.addEventListener("click", () => {
-      const question = questionEl.value;
-      const answer = answerEl.value;
+    // Show update container
+    showBtn2.addEventListener("click", () =>
+      addContainer2.classList.add("show")
+    );
 
-      if (question.trim() && answer.trim()) {
-        const newCard = { question, answer };
+    // Hide add container
+    hideAddBtn.addEventListener("click", () =>
+      addContainer1.classList.remove("show")
+    );
 
-        createCard(newCard);
-
-        questionEl.value = "";
-        answerEl.value = "";
-
-        addContainer.classList.remove("show");
-
-        cardsData.push(newCard);
-        setCardsData(cardsData);
-      }
-    });
+    // Hide add container
+    hideUpdateBtn.addEventListener("click", () =>
+      addContainer2.classList.remove("show")
+    );
 
     function proceed() {
       let form = document.getElementById("deleteForm");
       form.setAttribute(
         "action",
         `/api/delete/${notes[currentActiveCard]._id}`
+      );
+      form.submit();
+    }
+
+    function proceedUpdate() {
+      let form = document.getElementById("updateForm");
+      form.setAttribute(
+        "action",
+        `/api/update/${notes[currentActiveCard]._id}/${currentActiveCard}`
       );
       form.submit();
     }

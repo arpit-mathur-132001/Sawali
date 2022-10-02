@@ -42,6 +42,7 @@ app.use("/", require("./routes/index"));
 app.use("/api/note", require("./routes/note"));
 app.use("/api/clear", require("./routes/clear"));
 app.use("/api/delete", require("./routes/delete"));
+app.use("/api/update", require("./routes/update"));
 app.use("/auth", require("./routes/auth"));
 
 const PORT = 5000;

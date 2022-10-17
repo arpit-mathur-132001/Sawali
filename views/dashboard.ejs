@@ -11,86 +11,173 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/style.css" />
-
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
+    />
     <title>Cheat Code</title>
   </head>
   <body>
+    <!-- Google Auth -->
     <a href="/auth/logout" id="google-out">
       <button class="btn-logout" type="submit">
         <i class="fas fa-sign-out-alt"></i> Logout
       </button>
     </a>
 
-    <form action="/api/clear" method="POST">
+    <!-- Clear Cards -->
+    <!-- <form action="/api/clear" method="POST">
       <button id="clear" class="clear btn" type="submit">
         <i class="fas fa-trash"></i> Clear Cards
       </button>
-    </form>
+    </form> -->
 
-    <h1>
-      <button id="show2" class="btn btn-small btn1">
-        <i class="fas fa-edit"></i> Update This Card
-      </button>
-      Cheat Code
-      <button id="show1" class="btn btn-small btn2">
-        <i class="fas fa-plus"></i> Add New Card
-      </button>
-    </h1>
-    <div id="cards-container" class="cards">
-      <!-- <div class="card active">
-        <div class="inner-card">
-          <div class="inner-card-front">
-            <p>
-              What is PHP?
-            </p>
+    <!-- Show Cards -->
+    <div class="main-container">
+      <div class="flex-card">
+        <div class="flex-inner-card">
+          <!-- Add Card and Update Card Container -->
+          <div class="top-card-nav">
+            <button id="show2" class="btn btn-small btn1">
+              <i class="fas fa-edit"></i> Update This Card
+            </button>
+
+            <h1 class="main">Q</h1>
+
+            <button id="show1" class="btn btn-small btn2">
+              <i class="fas fa-plus"></i> Add New Card
+            </button>
           </div>
-          <div class="inner-card-back">
-            <p>
-              A programming language
-            </p>
+
+          <div id="cards-container" class="cards">
+            <!-- <div class="card active">
+            <div class="inner-card">
+              <div class="inner-card-front">
+                <p>
+                  What is PHP?
+                </p>
+              </div>
+              <div class="inner-card-back">
+                <p>
+                  A programming language
+                </p>
+              </div>
+            </div>
           </div>
+
+          <div class="card">
+            <div class="inner-card">
+              <div class="inner-card-front">
+                <p>
+                  What is PHP?
+                </p>
+              </div>
+              <div class="inner-card-back">
+                <p>
+                  A programming language
+                </p>
+              </div>
+            </div>
+          </div> -->
+          </div>
+          <!-- Next, Previous, Delete and add code buttons -->
+          <div class="bottom-card-nav">
+            <div class="delete-btn">
+              <form method="POST" id="deleteForm">
+                <button
+                  id="delete"
+                  class="btn btn-small btn4"
+                  type="button"
+                  onclick="proceed();"
+                >
+                  <i class="fas fa-trash"></i> Delete This Card
+                </button>
+              </form>
+            </div>
+
+            <div class="prev-next">
+              <button id="prev" class="nav-button">
+                <i class="fas fa-arrow-left"></i>
+              </button>
+
+              <p id="current"></p>
+
+              <button id="next" class="nav-button">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+
+            <!-- <div class="add-btn">
+              <button id="show3" class="btn btn-small btn3" type="button">
+                <i class="fas fa-code"></i> Add Code
+              </button>
+            </div> -->
+
+            <!-- Clear Cards -->
+            <form action="/api/clear" method="POST">
+              <button id="clear" class="btn btn-small btn3" type="submit">
+                <i class="fas fa-trash"></i> Clear Cards
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="flex-inner-code">
+          <!-- Add Card and Update Card Container -->
+          <div class="top-code-nav">
+            <button id="show4" class="btn btn-small btn1">
+              <i class="fas fa-edit"></i> Update This Code
+            </button>
+            <h1 class="main-code">Code</h1>
+            <button id="show3" class="btn btn-small btn2" type="button">
+              <i class="fas fa-code"></i> Add New Code
+            </button>
+            <h1 class="main-input">Input</h1>
+          </div>
+
+          <!-- Show Codes -->
+          <div id="codes-container" class="codes">
+            <!-- Code -->
+            <!-- <div class="code">
+          <div class="inner-code">
+            <pre class="inner-code-front"><code class="cpp" id="codeCard"><xmp>#include<iostream> 
+              using namespace std; 
+              int main(){
+                int n;
+                cin>>n;
+                cout<<n;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              }
+            </xmp></code></pre>
+          </div>
+        </div> -->
+
+            <!-- Output -->
+            <!-- <div>12</div> -->
+          </div>
+
+          <!-- Input -->
+          <!-- <div id="input-container" class="input-container"></div> -->
         </div>
       </div>
-
-      <div class="card">
-        <div class="inner-card">
-          <div class="inner-card-front">
-            <p>
-              What is PHP?
-            </p>
-          </div>
-          <div class="inner-card-back">
-            <p>
-              A programming language
-            </p>
-          </div>
-        </div>
-      </div> -->
     </div>
 
-    <div class="navigation">
-      <button id="prev" class="nav-button">
-        <i class="fas fa-arrow-left"></i>
-      </button>
-
-      <p id="current"></p>
-
-      <button id="next" class="nav-button">
-        <i class="fas fa-arrow-right"></i>
-      </button>
-
-      <form method="POST" id="deleteForm">
-        <button
-          id="delete"
-          class="btn btn-small"
-          type="button"
-          onclick="proceed();"
-        >
-          <i class="fas fa-trash"></i> Delete This Card
-        </button>
-      </form>
-    </div>
-
+    <!-- Saving a New Card -->
     <div id="add-container1" class="add-container">
       <h1>
         Add New Card
@@ -116,6 +203,7 @@
       </form>
     </div>
 
+    <!-- Updating a new card -->
     <div id="add-container2" class="add-container">
       <h1>
         Update This Card
@@ -143,74 +231,153 @@
         </button>
       </form>
     </div>
+
+    <!-- Coding a new code -->
+    <div id="add-container3" class="add-container">
+      <h1 class="codeh1">
+        Write Code
+        <button id="hideCode" class="btn btn-small btn-ghost">
+          <i class="fas fa-times"></i>
+        </button>
+      </h1>
+
+      <button class="run" onclick="getData();">
+        <i class="fas fa-play"></i> &nbsp;Run
+      </button>
+
+      <form method="POST" id="save-code">
+        <div class="form-group" id="hidden-code"></div>
+        <div class="form-group" id="hidden-input"></div>
+        <div class="form-group" id="hidden-output"></div>
+        <div class="form-group" id="hidden-code-number"></div>
+        <button class="save" type="button" onclick="saveData();">
+          <i class="fas fa-save"></i> &nbsp;Save
+        </button>
+      </form>
+
+      <select id="language">
+        <option value="cpp">Cpp</option>
+        <option value="c">C</option>
+        <option value="java">Java</option>
+        <option value="py">Python</option>
+        <option value="go">GoLang</option>
+        <option value="cs">C#</option>
+        <option value="js">NodeJS</option>
+      </select>
+      <div id="editor"></div>
+      <div class="input">
+        <textarea id="textareaInput" placeholder="Input..."></textarea>
+      </div>
+      <div class="output"></div>
+    </div>
   </body>
 
+  <!-- Highlighting code -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
   <script>
-    let notes = `<%- JSON.stringify(notes) %>`;
+    hljs.highlightAll();
+  </script>
 
+  <!-- Code editor -->
+  <script src="../js/ace.js" type="text/javascript" charset="utf-8"></script>
+
+  <script>
+    // Parsing saved notes
+    let notes = `<%- JSON.stringify(notes) %>`;
     notes = JSON.parse(notes);
 
     let currentActiveCard = 0;
 
-    const cardsContainer = document.getElementById("cards-container");
     const currentEl = document.getElementById("current");
     const prevBtn = document.getElementById("prev");
     const nextBtn = document.getElementById("next");
     const showBtn1 = document.getElementById("show1");
     const showBtn2 = document.getElementById("show2");
+    const showBtn3 = document.getElementById("show3");
     const hideAddBtn = document.getElementById("hideAdd");
     const hideUpdateBtn = document.getElementById("hideUpdate");
+    const hideCodeBtn = document.getElementById("hideCode");
     const addContainer1 = document.getElementById("add-container1");
     const addContainer2 = document.getElementById("add-container2");
-    const addCardBtn = document.getElementById("add-card");
-    const updateCardBtn = document.getElementById("update-card");
+    const addContainer3 = document.getElementById("add-container3");
     const clearBtn = document.getElementById("clear");
-    const q = document.getElementById("q");
-    const a = document.getElementById("a");
 
     // Store DOM cards
     const cardsEl = [];
     const quesEl = [];
     const ansEl = [];
+    const codesEl = [];
+    const inputEl = [];
+
+    // Parsing saved codes
+
+    let flag = `<%- JSON.stringify(flag) %>`;
+    flag = JSON.parse(flag);
+
+    // Parsing saved outputs
+
+    // Create all codes
+    // function createCodes() {
+    //   createCode(codes, outputs, 0);
+    // }
+    // createCodes();
 
     // Create all cards
+    let codes = `<%- JSON.stringify(codes) %>`;
+    function jsonEscape(str) {
+      return str
+        .replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")
+        .replace(/\t/g, "\\t");
+    }
+    codes = JSON.parse(jsonEscape(codes));
+
+    let codesArr = [];
+    codesArr.length = notes.length;
+    for (let i = 0; i < codes.length; i++) {
+      codesArr[codes[i].number] = codes[i];
+    }
+
+    // function createCards() {
+    //   for (var i = 0; i < notes.length; i++) {
+    //     createCard(notes[i], i);
+    //     updateCard(notes[i], i);
+    //     if (flag !== 0) {
+    //       var codes = `< JSON.stringify(codesArr[0][0]) %>`;
+    //       console.log(codes);
+    //     } else {
+    //       createCode("", "", "");
+    //     }
+    //   }
+    // }
+
     function createCards() {
-      for (let i = 0; i < notes.length; i++) {
+      for (var i = 0; i < notes.length; i++) {
         createCard(notes[i], i);
         updateCard(notes[i], i);
+        if (flag !== 0) {
+          // var codes =
+          //  codesArr;
+          // console.log(codes);
+          // let outputs = `<JSON.stringify(codesArr[0][2]) %>`;
+          // outputs = outputs.slice(1, -1);
+          // codes = codes.slice(1, -1);
+          // createCode(codes, outputs, i);
+          if (codesArr[i] !== undefined) {
+            createCode(codesArr[i], i);
+          } else {
+            createCode("", "");
+          }
+        } else {
+          createCode("", "", "");
+        }
       }
     }
-
-    // Update card
-    function updateCard(note, index) {
-      const ques = document.createElement("textarea");
-      ques.classList.add("ques");
-      ques.innerHTML = `${note.question}`;
-      ques.id = "ques";
-      ques.name = "ques";
-      ques.placeholder = "Enter Question...";
-      q.appendChild(ques);
-
-      const ans = document.createElement("textarea");
-      ans.classList.add("ans");
-      ans.innerHTML = `${note.answer}`;
-      ans.id = "ans";
-      ans.name = "ans";
-      ans.placeholder = "Enter Answer...";
-      a.appendChild(ans);
-
-      if (index === 0) {
-        ques.classList.add("active");
-        ans.classList.add("active");
-      }
-
-      // Update to DOM cards
-      quesEl.push(ques);
-      ansEl.push(ans);
-    }
+    createCards();
 
     // Create a single card in DOM
     function createCard(note, index) {
+      const cardsContainer = document.getElementById("cards-container");
       const card = document.createElement("div");
       card.classList.add("card");
 
@@ -250,13 +417,250 @@
       currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
     }
 
-    createCards();
+    // Update card
+    function updateCard(note, index) {
+      const q = document.getElementById("q");
+      const a = document.getElementById("a");
+      const ques = document.createElement("textarea");
+      ques.classList.add("ques");
+      ques.innerHTML = `${note.question}`;
+      ques.id = "ques";
+      ques.name = "ques";
+      ques.placeholder = "Enter Question...";
+      q.appendChild(ques);
+
+      const ans = document.createElement("textarea");
+      ans.classList.add("ans");
+      ans.innerHTML = `${note.answer}`;
+      ans.id = "ans";
+      ans.name = "ans";
+      ans.placeholder = "Enter Answer...";
+      a.appendChild(ans);
+
+      if (index === 0) {
+        ques.classList.add("active");
+        ans.classList.add("active");
+      }
+
+      // Update to DOM cards
+      quesEl.push(ques);
+      ansEl.push(ans);
+    }
+
+    // Delete card
+    function proceed() {
+      let form = document.getElementById("deleteForm");
+      form.setAttribute(
+        "action",
+        `/api/delete/${notes[currentActiveCard]._id}`
+      );
+      form.submit();
+    }
+
+    // Update card
+    function proceedUpdate() {
+      let form = document.getElementById("updateForm");
+      form.setAttribute(
+        "action",
+        `/api/update/${notes[currentActiveCard]._id}/${currentActiveCard}`
+      );
+
+      form.submit();
+    }
+
+    // Create a single card in DOM
+    function createCode(data, index) {
+      const codesContainer = document.getElementById("codes-container");
+      const code = document.createElement("div");
+      code.classList.add("code");
+
+      if (index === 0) {
+        code.classList.add("active");
+      }
+
+      if (data !== "") {
+        code.innerHTML = `
+      <div class="inner-code">
+
+        <pre class="inner-code-front">
+          <code class="cpp" id="codeCard"><xmp>${data.code}</xmp>
+          </code>
+        </pre>
+
+        <div class="inner-code-back">${data.output}</div>
+
+      </div>
+      `;
+      } else {
+        code.innerHTML = `
+      <div class="inner-code">
+
+        <pre class="inner-code-front">
+          <code class="cpp" id="codeCard"><xmp></xmp>
+          </code>
+        </pre>
+
+        <div class="inner-code-back"></div>
+
+      </div>
+      `;
+      }
+
+      const inputContainer = document.createElement("div");
+      inputContainer.classList.add("input-container");
+      inputContainer.setAttribute("id", "input-container");
+
+      if (index === 0) {
+        inputContainer.classList.add("active");
+      }
+
+      if (data !== "") {
+        inputContainer.innerHTML = `
+      <div class="inner-input">${data.input}</div>
+      `;
+      }
+
+      codesContainer.appendChild(inputContainer);
+
+      codesContainer.appendChild(code);
+
+      // Add to DOM cards
+      codesEl.push(code);
+      inputEl.push(inputContainer);
+
+      code.addEventListener("click", () =>
+        code.classList.toggle("show-answer")
+      );
+    }
+
+    // Editor
+    const editor = document.getElementById("editor");
+    var edit = ace.edit(editor);
+    edit.setTheme("ace/theme/twilight");
+    edit.session.setMode("ace/mode/c_cpp");
+    edit.setOptions({
+      fontSize: "20px",
+    });
+
+    // let inp = ` JSON.stringify(codesArr[0][1]) %>`;
+    // inp = inp.slice(1, -1);
+
+    // // Create all inputs
+    // function createInputs() {
+    //   createInput(inp, 0);
+    // }
+    // createInputs();
+
+    // Create a single card in DOM
+    // function createInput(inp, index) {
+    //   const inputContainer = document.getElementById("input-container");
+
+    //   inputContainer.innerHTML = `${inp}`;
+    // }
+
+    let op;
+    // Show output of code
+    const textareaInput = document.getElementById("textareaInput");
+    const output = document.querySelector(".output");
+    const languageSelect = document.querySelector("#language");
+
+    function getData() {
+      let code = edit.getValue();
+      let input = textareaInput.value;
+      let language = languageSelect.value;
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        code: code,
+        language: language,
+        input: input,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch("https://codex-api.herokuapp.com/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => (output.innerText = JSON.parse(result).output))
+        .catch((error) => console.log("error", error));
+    }
+
+    // Save output of code
+    function saveData() {
+      let code = edit.getValue();
+      let input = textareaInput.value;
+      let language = languageSelect.value;
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        code: code,
+        language: language,
+        input: input,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      const res = fetch("https://codex-api.herokuapp.com/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => (output.innerText = JSON.parse(result).output))
+        .catch((error) => console.log("error", error));
+
+      res.then((output) => {
+        hiddenCode = document.getElementById("hidden-code");
+        const hideCode = document.createElement("textarea");
+        hideCode.innerHTML = `${code}`;
+        hideCode.name = "code";
+        hideCode.type = "hidden";
+        hiddenCode.appendChild(hideCode);
+
+        hiddenInput = document.getElementById("hidden-input");
+        const hideInp = document.createElement("textarea");
+        hideInp.innerHTML = `${input}`;
+        hideInp.name = "input";
+        hideInp.type = "hidden";
+        hiddenInput.appendChild(hideInp);
+
+        hiddenOutput = document.getElementById("hidden-output");
+        const hideOutput = document.createElement("textarea");
+        hideOutput.innerHTML = `${output}`;
+        hideOutput.name = "output";
+        hideOutput.type = "hidden";
+        hiddenOutput.appendChild(hideOutput);
+
+        hiddenCodeNumber = document.getElementById("hidden-code-number");
+        const hideCodeNumber = document.createElement("textarea");
+        hideCodeNumber.innerHTML = `${currentActiveCard}`;
+        hideCodeNumber.name = "number";
+        hideCodeNumber.type = "hidden";
+        hiddenCodeNumber.appendChild(hideCodeNumber);
+
+        let form = document.getElementById("save-code");
+        form.setAttribute("action", `/api/code`);
+
+        form.submit();
+      });
+    }
 
     // Event listeners
 
     // Next button
     nextBtn.addEventListener("click", () => {
       cardsEl[currentActiveCard].className = "card left";
+      codesEl[currentActiveCard].className = "code left";
+      inputEl[currentActiveCard].className = "input-container left";
       quesEl[currentActiveCard].classList = "ques";
       ansEl[currentActiveCard].classList = "ans";
 
@@ -267,6 +671,8 @@
       }
 
       cardsEl[currentActiveCard].className = "card active";
+      codesEl[currentActiveCard].className = "code active";
+      inputEl[currentActiveCard].className = "input-container active";
       quesEl[currentActiveCard].className = "ques active";
       ansEl[currentActiveCard].className = "ans active";
 
@@ -276,6 +682,8 @@
     // Prev button
     prevBtn.addEventListener("click", () => {
       cardsEl[currentActiveCard].className = "card right";
+      codesEl[currentActiveCard].className = "code right";
+      inputEl[currentActiveCard].className = "input-container right";
       quesEl[currentActiveCard].classList = "ques";
       ansEl[currentActiveCard].classList = "ans";
 
@@ -286,6 +694,8 @@
       }
 
       cardsEl[currentActiveCard].className = "card active";
+      codesEl[currentActiveCard].className = "code active";
+      inputEl[currentActiveCard].className = "input-container active";
       quesEl[currentActiveCard].className = "ques active";
       ansEl[currentActiveCard].className = "ans active";
 
@@ -302,32 +712,24 @@
       addContainer2.classList.add("show")
     );
 
+    // Show code container
+    showBtn3.addEventListener("click", () =>
+      addContainer3.classList.add("show")
+    );
+
     // Hide add container
     hideAddBtn.addEventListener("click", () =>
       addContainer1.classList.remove("show")
     );
 
-    // Hide add container
+    // Hide update container
     hideUpdateBtn.addEventListener("click", () =>
       addContainer2.classList.remove("show")
     );
 
-    function proceed() {
-      let form = document.getElementById("deleteForm");
-      form.setAttribute(
-        "action",
-        `/api/delete/${notes[currentActiveCard]._id}`
-      );
-      form.submit();
-    }
-
-    function proceedUpdate() {
-      let form = document.getElementById("updateForm");
-      form.setAttribute(
-        "action",
-        `/api/update/${notes[currentActiveCard]._id}/${currentActiveCard}`
-      );
-      form.submit();
-    }
+    // Hide update container
+    hideCodeBtn.addEventListener("click", () =>
+      addContainer3.classList.remove("show")
+    );
   </script>
 </html>

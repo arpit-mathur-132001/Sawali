@@ -33,22 +33,11 @@ router.get("/dashboard", ensureAuth, async (req, res) => {
   let flag = 0;
 
   console.log(codes);
-
-  if (codes.length !== 0) {
-    flag = 1;
-    res.render("dashboard", {
-      notes,
-      codes,
-      flag,
-    });
-  } else {
-    let arr = [[23]];
-    res.render("dashboard", {
-      notes,
-      arr,
-      flag,
-    });
-  }
+  res.render("dashboard", {
+    notes,
+    codes,
+    flag,
+  });
 });
 
 module.exports = router;

@@ -30,7 +30,15 @@ body {
   top: 20px;
 }
 
-#editor {
+#editor1 {
+  position: absolute;
+  top: 10%;
+  bottom: 0;
+  width: 88%;
+  height: 55%;
+}
+
+#editor2 {
   position: absolute;
   top: 10%;
   bottom: 0;
@@ -89,6 +97,15 @@ body {
 }
 
 #textareaInput {
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+#textareaInput2 {
   width: 100%;
   height: 100%;
   font-size: 18px;
@@ -325,6 +342,15 @@ body {
 
 .bottom-card-nav {
   display: flex;
+}
+
+.bottom-code-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+#clear-codes {
+  margin-right: 165px;
 }
 
 .main {

@@ -116,7 +116,7 @@
             <!-- Clear Cards -->
             <form action="/api/clear" method="POST">
               <button id="clear" class="btn btn-small btn3" type="submit">
-                <i class="fas fa-trash"></i> Clear Cards
+                <i class="fa fas fa-trash"></i> Clear Cards
               </button>
             </form>
           </div>
@@ -173,6 +173,29 @@
 
           <!-- Input -->
           <!-- <div id="input-container" class="input-container"></div> -->
+
+          <!-- Next, Previous, Delete and add code buttons -->
+          <div class="bottom-code-nav">
+            <div class="delete-btn">
+              <form method="POST" id="deleteCodeForm">
+                <button
+                  id="delete"
+                  class="btn btn-small btn4"
+                  type="button"
+                  onclick="proceedDeleteCode();"
+                >
+                  <i class="fas fa-trash"></i> Delete This Code
+                </button>
+              </form>
+            </div>
+
+            <!-- Clear Cards -->
+            <form action="/api/clear_codes" method="POST">
+              <button id="clear-codes" class="btn btn-small btn3" type="submit">
+                <i class="fas fa-trash"></i> Clear Codes
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -236,12 +259,12 @@
     <div id="add-container3" class="add-container">
       <h1 class="codeh1">
         Write Code
-        <button id="hideCode" class="btn btn-small btn-ghost">
+        <button id="hideCode1" class="btn btn-small btn-ghost">
           <i class="fas fa-times"></i>
         </button>
       </h1>
 
-      <button class="run" onclick="getData();">
+      <button class="run" onclick="getData1();">
         <i class="fas fa-play"></i> &nbsp;Run
       </button>
 
@@ -264,11 +287,51 @@
         <option value="cs">C#</option>
         <option value="js">NodeJS</option>
       </select>
-      <div id="editor"></div>
+      <div id="editor1"></div>
       <div class="input">
         <textarea id="textareaInput" placeholder="Input..."></textarea>
       </div>
       <div class="output"></div>
+    </div>
+
+    <!-- Update code -->
+    <div id="add-container4" class="add-container">
+      <h1 class="codeh1">
+        Update Code
+        <button id="hideCode2" class="btn btn-small btn-ghost">
+          <i class="fas fa-times"></i>
+        </button>
+      </h1>
+
+      <button class="run" onclick="getData2();">
+        <i class="fas fa-play"></i> &nbsp;Run
+      </button>
+
+      <form method="POST" id="update-code">
+        <div class="form-group" id="hidden-updated-code"></div>
+        <div class="form-group" id="hidden-updated-input"></div>
+        <div class="form-group" id="hidden-updated-output"></div>
+        <div class="form-group" id="hidden-updated-code-number"></div>
+
+        <button class="save" type="button" onclick="saveUpdatedData();">
+          <i class="fas fa-save"></i> &nbsp;Save
+        </button>
+      </form>
+
+      <select id="language">
+        <option value="cpp">Cpp</option>
+        <option value="c">C</option>
+        <option value="java">Java</option>
+        <option value="py">Python</option>
+        <option value="go">GoLang</option>
+        <option value="cs">C#</option>
+        <option value="js">NodeJS</option>
+      </select>
+      <div id="editor2"></div>
+      <div class="input">
+        <textarea id="textareaInput2" placeholder="Input..."></textarea>
+      </div>
+      <div class="output" id="update-output"></div>
     </div>
   </body>
 
@@ -294,12 +357,15 @@
     const showBtn1 = document.getElementById("show1");
     const showBtn2 = document.getElementById("show2");
     const showBtn3 = document.getElementById("show3");
+    const showBtn4 = document.getElementById("show4");
     const hideAddBtn = document.getElementById("hideAdd");
     const hideUpdateBtn = document.getElementById("hideUpdate");
-    const hideCodeBtn = document.getElementById("hideCode");
+    const hideCodeBtn1 = document.getElementById("hideCode1");
+    const hideCodeBtn2 = document.getElementById("hideCode2");
     const addContainer1 = document.getElementById("add-container1");
     const addContainer2 = document.getElementById("add-container2");
     const addContainer3 = document.getElementById("add-container3");
+    const addContainer4 = document.getElementById("add-container4");
     const clearBtn = document.getElementById("clear");
 
     // Store DOM cards
@@ -355,21 +421,17 @@
       for (var i = 0; i < notes.length; i++) {
         createCard(notes[i], i);
         updateCard(notes[i], i);
-        if (flag !== 0) {
-          // var codes =
-          //  codesArr;
-          // console.log(codes);
-          // let outputs = `<JSON.stringify(codesArr[0][2]) %>`;
-          // outputs = outputs.slice(1, -1);
-          // codes = codes.slice(1, -1);
-          // createCode(codes, outputs, i);
-          if (codesArr[i] !== undefined) {
-            createCode(codesArr[i], i);
-          } else {
-            createCode("", "");
-          }
+        // var codes =
+        //  codesArr;
+        // console.log(codes);
+        // let outputs = `<JSON.stringify(codesArr[0][2]) %>`;
+        // outputs = outputs.slice(1, -1);
+        // codes = codes.slice(1, -1);
+        // createCode(codes, outputs, i);
+        if (codesArr[i] !== undefined) {
+          createCode(codesArr[i], i);
         } else {
-          createCode("", "", "");
+          createCode("", i);
         }
       }
     }
@@ -457,6 +519,16 @@
       form.submit();
     }
 
+    // Delete card
+    function proceedDeleteCode() {
+      let form = document.getElementById("deleteCodeForm");
+      form.setAttribute(
+        "action",
+        `/api/delete_code/${codesArr[currentActiveCard]._id}`
+      );
+      form.submit();
+    }
+
     // Update card
     function proceedUpdate() {
       let form = document.getElementById("updateForm");
@@ -533,12 +605,48 @@
       );
     }
 
-    // Editor
-    const editor = document.getElementById("editor");
-    var edit = ace.edit(editor);
-    edit.setTheme("ace/theme/twilight");
-    edit.session.setMode("ace/mode/c_cpp");
-    edit.setOptions({
+    // Editor 1
+    const editor1 = document.getElementById("editor1");
+    var edit1 = ace.edit(editor1);
+    edit1.setTheme("ace/theme/twilight");
+    edit1.session.setMode("ace/mode/c_cpp");
+    edit1.setOptions({
+      fontSize: "20px",
+    });
+
+    // Editor 2
+    const editor2 = document.getElementById("editor2");
+    var edit2 = ace.edit(editor2);
+    const textareaInput2 = document.getElementById("textareaInput2");
+    const updateOutput = document.getElementById("update-output");
+
+    if (codesArr[0] !== undefined) {
+      if (currentActiveCard == 0) {
+        edit2.setValue(codesArr[currentActiveCard].code);
+        textareaInput2.value = codesArr[currentActiveCard].input;
+        updateOutput.innerHTML = codesArr[currentActiveCard].output;
+      }
+    }
+    function updateCodeText(num) {
+      if (codesArr[num] !== undefined) {
+        edit2.setValue(codesArr[num].code);
+        textareaInput2.value = codesArr[currentActiveCard].input;
+        updateOutput.innerHTML = codesArr[currentActiveCard].output;
+      } else {
+        edit2.setValue("");
+        textareaInput2.value = "";
+        updateOutput.innerHTML = "";
+      }
+    }
+    edit1.setTheme("ace/theme/twilight");
+    edit1.session.setMode("ace/mode/c_cpp");
+    edit1.setOptions({
+      fontSize: "20px",
+    });
+
+    edit2.setTheme("ace/theme/twilight");
+    edit2.session.setMode("ace/mode/c_cpp");
+    edit2.setOptions({
       fontSize: "20px",
     });
 
@@ -564,8 +672,8 @@
     const output = document.querySelector(".output");
     const languageSelect = document.querySelector("#language");
 
-    function getData() {
-      let code = edit.getValue();
+    function getData1() {
+      let code = edit1.getValue();
       let input = textareaInput.value;
       let language = languageSelect.value;
 
@@ -591,9 +699,36 @@
         .catch((error) => console.log("error", error));
     }
 
+    function getData2() {
+      let code = edit2.getValue();
+      let input = textareaInput2.value;
+      let language = languageSelect.value;
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        code: code,
+        language: language,
+        input: input,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch("https://codex-api.herokuapp.com/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => (updateOutput.innerText = JSON.parse(result).output))
+        .catch((error) => console.log("error", error));
+    }
+
     // Save output of code
     function saveData() {
-      let code = edit.getValue();
+      let code = edit1.getValue();
       let input = textareaInput.value;
       let language = languageSelect.value;
 
@@ -654,6 +789,82 @@
       });
     }
 
+    // Save output of updated code
+    function saveUpdatedData() {
+      let code = edit2.getValue();
+      let input = textareaInput2.value;
+      let language = languageSelect.value;
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        code: code,
+        language: language,
+        input: input,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      const res = fetch("https://codex-api.herokuapp.com/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => (output.innerText = JSON.parse(result).output))
+        .catch((error) => console.log("error", error));
+
+      res.then((output) => {
+        hiddenCode = document.getElementById("hidden-updated-code");
+        const hideCode = document.createElement("textarea");
+        hideCode.innerHTML = `${code}`;
+        hideCode.name = "code";
+        hideCode.type = "hidden";
+        hiddenCode.appendChild(hideCode);
+
+        hiddenInput = document.getElementById("hidden-updated-input");
+        const hideInp = document.createElement("textarea");
+        hideInp.innerHTML = `${input}`;
+        hideInp.name = "input";
+        hideInp.type = "hidden";
+        hiddenInput.appendChild(hideInp);
+
+        hiddenOutput = document.getElementById("hidden-updated-output");
+        const hideOutput = document.createElement("textarea");
+        hideOutput.innerHTML = `${output}`;
+        hideOutput.name = "output";
+        hideOutput.type = "hidden";
+        hiddenOutput.appendChild(hideOutput);
+
+        hiddenCodeNumber = document.getElementById(
+          "hidden-updated-code-number"
+        );
+        const hideCodeNumber = document.createElement("textarea");
+        hideCodeNumber.innerHTML = `${currentActiveCard}`;
+        hideCodeNumber.name = "number";
+        hideCodeNumber.type = "hidden";
+        hiddenCodeNumber.appendChild(hideCodeNumber);
+
+        // form.setAttribute(
+        //   "action",
+        //   `/api/update/${notes[currentActiveCard]._id}/${currentActiveCard}`
+        // );
+
+        // form.submit();
+
+        let form = document.getElementById("update-code");
+        // form.setAttribute("action", `/api/code`);
+        form.setAttribute(
+          "action",
+          `/api/update_code/${codesArr[currentActiveCard]._id}/${currentActiveCard}`
+        );
+
+        form.submit();
+      });
+    }
+
     // Event listeners
 
     // Next button
@@ -665,6 +876,8 @@
       ansEl[currentActiveCard].classList = "ans";
 
       currentActiveCard = currentActiveCard + 1;
+
+      updateCodeText(currentActiveCard);
 
       if (currentActiveCard > cardsEl.length - 1) {
         currentActiveCard = cardsEl.length - 1;
@@ -688,6 +901,8 @@
       ansEl[currentActiveCard].classList = "ans";
 
       currentActiveCard = currentActiveCard - 1;
+
+      updateCodeText(currentActiveCard);
 
       if (currentActiveCard < 0) {
         currentActiveCard = 0;
@@ -717,6 +932,11 @@
       addContainer3.classList.add("show")
     );
 
+    // Show update code container
+    showBtn4.addEventListener("click", () =>
+      addContainer4.classList.add("show")
+    );
+
     // Hide add container
     hideAddBtn.addEventListener("click", () =>
       addContainer1.classList.remove("show")
@@ -727,9 +947,14 @@
       addContainer2.classList.remove("show")
     );
 
-    // Hide update container
-    hideCodeBtn.addEventListener("click", () =>
+    // Hide code container
+    hideCodeBtn1.addEventListener("click", () =>
       addContainer3.classList.remove("show")
+    );
+
+    // Hide update container
+    hideCodeBtn2.addEventListener("click", () =>
+      addContainer4.classList.remove("show")
     );
   </script>
 </html>

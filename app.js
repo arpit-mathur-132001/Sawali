@@ -41,9 +41,12 @@ app.use(passport.session());
 app.use("/", require("./routes/index"));
 app.use("/api/note", require("./routes/note"));
 app.use("/api/clear", require("./routes/clear"));
+app.use("/api/clear_codes", require("./routes/clear_codes"));
 app.use("/api/delete", require("./routes/delete"));
+app.use("/api/delete_code", require("./routes/delete_code"));
 app.use("/api/code", require("./routes/code"));
 app.use("/api/update", require("./routes/update"));
+app.use("/api/update_code", require("./routes/update_code"));
 app.use("/auth", require("./routes/auth"));
 
 const PORT = 5000;

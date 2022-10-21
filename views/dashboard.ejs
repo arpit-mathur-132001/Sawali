@@ -202,7 +202,7 @@
 
     <!-- Saving a New Card -->
     <div id="add-container1" class="add-container">
-      <h1>
+      <h1 id="new-card-title">
         Add New Card
         <button id="hideAdd" class="btn btn-small btn-ghost">
           <i class="fas fa-times"></i>
@@ -212,12 +212,26 @@
       <form action="/api/note" method="POST">
         <div class="form-group">
           <label for="question">Question</label>
-          <textarea placeholder="Enter question..." name="ques"></textarea>
+          <textarea
+            placeholder="Enter question..."
+            name="ques"
+            id="question"
+            onkeyup="getLineNumber(this, document.getElementById('lineNo1'));"
+            onmouseup="this.onkeyup();"
+          ></textarea>
+          <div id="lineNo1"></div>
         </div>
 
         <div class="form-group">
           <label for="answer">Answer</label>
-          <textarea placeholder="Enter Answer..." name="ans"></textarea>
+          <textarea
+            placeholder="Enter Answer..."
+            name="ans"
+            id="answer"
+            onkeyup="getLineNumber(this, document.getElementById('lineNo2'));"
+            onmouseup="this.onkeyup();"
+          ></textarea>
+          <div id="lineNo2"></div>
         </div>
 
         <button id="add-card" class="btn" type="submit">
@@ -345,9 +359,17 @@
   <script src="../js/ace.js" type="text/javascript" charset="utf-8"></script>
 
   <script>
+    function jsonEscape(str) {
+      return str
+        .replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")
+        .replace(/\t/g, "\\t");
+    }
+
     // Parsing saved notes
     let notes = `<%- JSON.stringify(notes) %>`;
-    notes = JSON.parse(notes);
+    notes = JSON.parse(jsonEscape(notes));
+    console.log(notes);
 
     let currentActiveCard = 0;
 
@@ -390,13 +412,8 @@
 
     // Create all cards
     let codes = `<%- JSON.stringify(codes) %>`;
-    function jsonEscape(str) {
-      return str
-        .replace(/\n/g, "\\n")
-        .replace(/\r/g, "\\r")
-        .replace(/\t/g, "\\t");
-    }
     codes = JSON.parse(jsonEscape(codes));
+    console.log(codes);
 
     let codesArr = [];
     codesArr.length = notes.length;
@@ -447,17 +464,15 @@
         card.classList.add("active");
       }
 
+      console.log(note.question);
+
       card.innerHTML = `
       <div class="inner-card">
         <div class="inner-card-front">
-          <p>
-            ${note.question}
-          </p>
+          <xmp style="margin:0">${note.question}</xmp>
         </div>
         <div class="inner-card-back">
-          <p>
-            ${note.answer}
-          </p>
+          <xmp style="margin:0">${note.answer}</xmp>
         </div>
       </div>
       `;
@@ -508,6 +523,93 @@
       quesEl.push(ques);
       ansEl.push(ans);
     }
+
+    // Question bullet points
+    // const questionBullet = document.getElementById("question");
+    // let enter = 0;
+    // const questionBulletArr = [];
+    // questionBullet.addEventListener("keydown", function (e) {
+    //   // const questionBulletArr = questionBullet.value.split(/\r?\n/);
+    //   console.log(questionBulletArr);
+    //   if (e.ctrlKey && e.shiftKey && e.key === "L") {
+    //     if (enter === 0) {
+    //       questionBullet.value = "• " + questionBullet.value;
+    //     } else {
+    //       questionBulletArr[enter] = "• " + questionBulletArr[enter];
+    //     }
+    //   }
+    //   // const questionBulletArr = questionBullet.value.split(/\r?\n/);
+    //   // if (e.ctrlKey && e.shiftKey && e.key === "L") {
+    //   //   console.log(questionBulletArr);
+    //   //   console.log(enter);
+    //   //   if (questionBulletArr.length !== 1) {
+    //   //     questionBulletArr[enter] = "• " + questionBulletArr[enter];
+    //   //     questionBullet.value = "";
+    //   //     for (let i = 0; i < questionBulletArr.length; i++) {
+    //   //       questionBullet.value =
+    //   //         questionBullet.value + questionBulletArr[i] + "\n";
+    //   //     }
+    //   //   } else {
+    //   //     questionBullet.value = "• " + questionBullet.value;
+    //   //   }
+    //   //   console.log(questionBulletArr);
+    //   // }
+    //   if (e.which === 13) {
+    //     if (enter === 0) {
+    //       questionBulletArr[enter] = questionBullet.value;
+    //     } else {
+    //       questionBulletArr.push(val);
+    //     }
+    //     enter++;
+    //   }
+    // });
+
+    let len;
+    let arr;
+    let currPos;
+    let enterArr;
+    let checkBullet;
+
+    function getLineNumber(textarea, indicator) {
+      len = textarea.value
+        .substr(0, textarea.selectionStart)
+        .split("\n").length;
+      currPos = textarea.selectionStart;
+
+      arr = textarea.value.split("\n");
+      enterArr = textarea.value.substr(0, textarea.selectionStart).split("\n");
+      checkBullet = enterArr[len - 1][0];
+    }
+
+    const questionBullet = document.getElementById("question");
+
+    questionBullet.addEventListener("keydown", function (e) {
+      if (e.ctrlKey && e.shiftKey && e.key === "L") {
+        // questionBulletArr[enter] = "• " + questionBulletArr[enter];
+
+        arr[len - 1] = "• " + arr[len - 1];
+
+        questionBullet.value = "";
+
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] != arr[arr.length - 1]) {
+            questionBullet.value = questionBullet.value + arr[i] + "\n";
+          } else {
+            questionBullet.value = questionBullet.value + arr[i];
+          }
+        }
+        questionBullet.selectionEnd = currPos + 2;
+      }
+      if (e.which === 13) {
+        if (checkBullet === "•" && arr[len - 1] !== "• ") {
+          e.preventDefault();
+          questionBullet.value = questionBullet.value + "\n• ";
+        } else if (arr[len - 1] === "• ") {
+          e.preventDefault();
+          questionBullet.value = questionBullet.value.slice(0, -2);
+        }
+      }
+    });
 
     // Delete card
     function proceed() {

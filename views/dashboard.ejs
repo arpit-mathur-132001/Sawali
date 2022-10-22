@@ -525,7 +525,7 @@
     const ques = document.getElementById("ques");
     const ans = document.getElementById("ans");
 
-    if (currentActiveCard == 0) {
+    if (currentActiveCard === 0 && notes.length !== 0) {
       ques.value = notes[currentActiveCard].question;
       ans.value = notes[currentActiveCard].answer;
     }
@@ -1064,54 +1064,58 @@
 
     // Next button
     nextBtn.addEventListener("click", () => {
-      cardsEl[currentActiveCard].className = "card left";
-      codesEl[currentActiveCard].className = "code left";
-      inputEl[currentActiveCard].className = "input-container left";
-      // quesEl[currentActiveCard].classList = "ques";
-      // ansEl[currentActiveCard].classList = "ans";
+      if (notes.length !== 0) {
+        cardsEl[currentActiveCard].className = "card left";
+        codesEl[currentActiveCard].className = "code left";
+        inputEl[currentActiveCard].className = "input-container left";
+        // quesEl[currentActiveCard].classList = "ques";
+        // ansEl[currentActiveCard].classList = "ans";
 
-      currentActiveCard = currentActiveCard + 1;
+        currentActiveCard = currentActiveCard + 1;
 
-      updateCodeText(currentActiveCard);
-      updateCardText(currentActiveCard);
+        updateCodeText(currentActiveCard);
+        updateCardText(currentActiveCard);
 
-      if (currentActiveCard > cardsEl.length - 1) {
-        currentActiveCard = cardsEl.length - 1;
+        if (currentActiveCard > cardsEl.length - 1) {
+          currentActiveCard = cardsEl.length - 1;
+        }
+
+        cardsEl[currentActiveCard].className = "card active";
+        codesEl[currentActiveCard].className = "code active";
+        inputEl[currentActiveCard].className = "input-container active";
+        // quesEl[currentActiveCard].className = "ques active";
+        // ansEl[currentActiveCard].className = "ans active";
+
+        updateCurrentText();
       }
-
-      cardsEl[currentActiveCard].className = "card active";
-      codesEl[currentActiveCard].className = "code active";
-      inputEl[currentActiveCard].className = "input-container active";
-      // quesEl[currentActiveCard].className = "ques active";
-      // ansEl[currentActiveCard].className = "ans active";
-
-      updateCurrentText();
     });
 
     // Prev button
     prevBtn.addEventListener("click", () => {
-      cardsEl[currentActiveCard].className = "card right";
-      codesEl[currentActiveCard].className = "code right";
-      inputEl[currentActiveCard].className = "input-container right";
-      // quesEl[currentActiveCard].classList = "ques";
-      // ansEl[currentActiveCard].classList = "ans";
+      if (notes.length !== 0) {
+        cardsEl[currentActiveCard].className = "card right";
+        codesEl[currentActiveCard].className = "code right";
+        inputEl[currentActiveCard].className = "input-container right";
+        // quesEl[currentActiveCard].classList = "ques";
+        // ansEl[currentActiveCard].classList = "ans";
 
-      currentActiveCard = currentActiveCard - 1;
+        currentActiveCard = currentActiveCard - 1;
 
-      updateCodeText(currentActiveCard);
-      updateCardText(currentActiveCard);
+        updateCodeText(currentActiveCard);
+        updateCardText(currentActiveCard);
 
-      if (currentActiveCard < 0) {
-        currentActiveCard = 0;
+        if (currentActiveCard < 0) {
+          currentActiveCard = 0;
+        }
+
+        cardsEl[currentActiveCard].className = "card active";
+        codesEl[currentActiveCard].className = "code active";
+        inputEl[currentActiveCard].className = "input-container active";
+        // quesEl[currentActiveCard].className = "ques active";
+        // ansEl[currentActiveCard].className = "ans active";
+
+        updateCurrentText();
       }
-
-      cardsEl[currentActiveCard].className = "card active";
-      codesEl[currentActiveCard].className = "code active";
-      inputEl[currentActiveCard].className = "input-container active";
-      // quesEl[currentActiveCard].className = "ques active";
-      // ansEl[currentActiveCard].className = "ans active";
-
-      updateCurrentText();
     });
 
     // Show add container

@@ -147,7 +147,7 @@ body {
 }
 
 .btn-small {
-  font-size: 12px;
+  font-size: 13px;
   padding: 5px 10px;
 }
 
@@ -165,7 +165,6 @@ body {
   position: relative;
   height: 525px;
   width: 500px;
-  max-width: 100%;
 }
 
 .flex-card {
@@ -217,7 +216,7 @@ body {
 }
 
 #show3 {
-  margin-left: 34px;
+  margin-left: 16px;
 }
 
 /* .inner-code {
@@ -286,7 +285,7 @@ body {
   margin-left: 515px;
   padding: 1em;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 1.5em;
   font-family: monospace;
   color: #444;
   opacity: 0;
@@ -342,6 +341,7 @@ body {
 
 .bottom-card-nav {
   display: flex;
+  justify-content: space-between;
 }
 
 .bottom-code-nav {
@@ -362,7 +362,6 @@ body {
 .flex-inner-card {
   display: flex;
   flex-direction: column;
-  margin-right: 75px;
 }
 
 .flex-inner-code {
@@ -372,7 +371,6 @@ body {
 
 #codeCard {
   max-height: 400px;
-  font-size: 15px;
   background-color: white;
   position: absolute;
   top: 0;
@@ -453,9 +451,8 @@ body {
 
 .prev-next {
   display: inherit;
-  margin-right: 121px;
-  margin-left: 83px;
-  margin-top: 3px;
+  margin: auto 10px;
+  z-index: 0;
 }
 
 .card.show-answer .inner-card {

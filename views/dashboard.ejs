@@ -268,7 +268,7 @@
         </button>
       </form> -->
 
-      <form action="/api/update" method="POST">
+      <form method="POST" id="update-card">
         <div class="form-group">
           <label for="question">Question</label>
           <textarea
@@ -293,7 +293,12 @@
           <div id="lineNo2"></div>
         </div>
 
-        <button id="update-card" class="btn" type="submit">
+        <button
+          id="update-card"
+          class="btn"
+          type="button"
+          onclick="proceedUpdate()"
+        >
           <i class="fas fa-edit"></i> Update Card
         </button>
       </form>
@@ -726,7 +731,7 @@
 
     // Update card
     function proceedUpdate() {
-      let form = document.getElementById("updateForm");
+      let form = document.getElementById("update-card");
       form.setAttribute(
         "action",
         `/api/update/${notes[currentActiveCard]._id}/${currentActiveCard}`

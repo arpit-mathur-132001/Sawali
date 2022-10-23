@@ -12,8 +12,8 @@ router.post("/:id/:num", async (req, res) => {
   const num = req.params.num;
   try {
     await Notes.findByIdAndUpdate(id, {
-      question: question[num],
-      answer: answer[num],
+      question: question,
+      answer: answer,
     });
     res.redirect("/dashboard");
   } catch (err) {

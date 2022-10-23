@@ -369,7 +369,6 @@ body {
 }
 
 #codeCard {
-  max-height: 400px;
   background-color: white;
   position: absolute;
   top: 0;

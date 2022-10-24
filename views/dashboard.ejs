@@ -501,10 +501,10 @@
       card.innerHTML = `
       <div class="inner-card">
         <div class="inner-card-front">
-          <xmp style="margin:0; white-space:break-spaces;">${note.question}</xmp>
+          <xmp style="margin:0; white-space:break-spaces; overflow: auto">${note.question}</xmp>
         </div>
         <div class="inner-card-back">
-          <xmp style="margin:0; white-space:break-spaces;">${note.answer}</xmp>
+          <xmp style="margin:0; white-space:break-spaces; overflow: auto">${note.answer}</xmp>
         </div>
       </div>
       `;

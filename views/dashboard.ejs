@@ -10,7 +10,7 @@
       integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <link
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
@@ -18,6 +18,14 @@
     <title>Cheat Code</title>
   </head>
   <body>
+    <!-- Back button -->
+    <a href="/sawali" id="back-button">
+      <button class="btn-logout" type="submit">
+        <i class="fas fa-solid fa-chevron-left"></i>
+        <!-- <i class="fas fa-sign-out-alt"></i> Logout -->
+      </button>
+    </a>
+
     <!-- Google auth -->
     <a href="/auth/logout" id="google-out">
       <button class="btn-logout" type="submit">
@@ -62,7 +70,7 @@
             </div>
 
             <!-- Clear cards -->
-            <form action="/api/clear" method="POST">
+            <form action="/api/clear" method="POST" id="clear-card-form">
               <button id="clear" class="btn btn-small btn3" type="submit">
                 <i class="fa fas fa-trash"></i> Clear Cards
               </button>
@@ -116,7 +124,7 @@
             </div>
 
             <!-- Clear codes -->
-            <form action="/api/clear_codes" method="POST">
+            <form action="/api/clear_codes" method="POST" id="clear-code-form">
               <button id="clear-codes" class="btn btn-small btn3" type="submit">
                 <i class="fas fa-trash"></i> Clear Codes
               </button>
@@ -135,7 +143,7 @@
         </button>
       </h1>
 
-      <form action="/api/note" method="POST">
+      <form action="" method="POST" id="create-card-form">
         <div class="form-group">
           <label for="question">Question</label>
           <textarea
@@ -298,7 +306,7 @@
   </script>
 
   <!-- Code editor -->
-  <script src="../js/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../js/ace.js" type="text/javascript" charset="utf-8"></script>
 
   <script>
     // Replace \\n with \n
@@ -316,9 +324,12 @@
     // Parsing saved codes
     let codes = `<%- JSON.stringify(codes) %>`;
     codes = JSON.parse(jsonEscape(codes));
+
+    let titles = `<%- JSON.stringify(titles) %>`;
+    titles = JSON.parse(titles);
   </script>
-  <script src="../js/script.js"></script>
-  <script src="../js/prev-next.js"></script>
-  <script src="../js/codes.js"></script>
-  <script src="../js/cards.js"></script>
+  <script src="../../js/script.js"></script>
+  <script src="../../js/prev-next.js"></script>
+  <script src="../../js/codes.js"></script>
+  <script src="../../js/cards.js"></script>
 </html>

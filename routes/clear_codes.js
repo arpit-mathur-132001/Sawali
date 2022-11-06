@@ -5,10 +5,11 @@ const Codes = require("../models/Codes");
 
 // @route   POST /api/clear_codes/
 // @desc    Create short URL
-router.post("/", async (req, res) => {
+router.post("/:id", async (req, res) => {
   try {
-    await Codes.find({ user: req.user.id }).deleteMany({});
-    res.redirect("/dashboard");
+    const title = req.params["id"];
+    await Codes.find({ title: title }).deleteMany({});
+    res.redirect(`/dashboard/${title}`);
   } catch (err) {
     console.log(err);
     res.status(500).json("Server error");

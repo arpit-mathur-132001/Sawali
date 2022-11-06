@@ -242,7 +242,7 @@ function saveData() {
     hiddenCodeNumber.appendChild(hideCodeNumber);
 
     let form = document.getElementById("save-code");
-    form.setAttribute("action", `/api/code`);
+    form.setAttribute("action", `code/${lastId}`);
 
     form.submit();
   });
@@ -308,11 +308,21 @@ function saveUpdatedData() {
     // form.setAttribute("action", `/api/code`);
     form.setAttribute(
       "action",
-      `/api/update_code/${codesArr[currentActiveCard]._id}/${currentActiveCard}`
+      `/api/update_code/${codesArr[currentActiveCard]._id}/${lastId}`
     );
 
     form.submit();
   });
+}
+
+// Delete code
+function proceedDeleteCode() {
+  let form = document.getElementById("deleteCodeForm");
+  form.setAttribute(
+    "action",
+    `/api/delete_code/${codesArr[currentActiveCard]._id}/${lastId}`
+  );
+  form.submit();
 }
 
 // Show code container
@@ -330,3 +340,6 @@ hideCodeBtn1.addEventListener("click", () =>
 hideCodeBtn2.addEventListener("click", () =>
   addContainer4.classList.remove("show")
 );
+
+const clearCodeForm = document.getElementById("clear-code-form");
+clearCodeForm.setAttribute("action", `clear_codes/${lastId}`);

@@ -9,6 +9,8 @@ const addContainer2 = document.getElementById("add-container2");
 
 const clearBtn = document.getElementById("clear");
 
+const lastId = document.getElementsByTagName("a")[0].baseURI.split("/").pop();
+
 // Store DOM cards
 const cardsEl = [];
 
@@ -207,16 +209,9 @@ answerUpdateBullet.addEventListener("keydown", function (e) {
 // Delete card
 function proceed() {
   let form = document.getElementById("deleteForm");
-  form.setAttribute("action", `/api/delete/${notes[currentActiveCard]._id}`);
-  form.submit();
-}
-
-// Delete card
-function proceedDeleteCode() {
-  let form = document.getElementById("deleteCodeForm");
   form.setAttribute(
     "action",
-    `/api/delete_code/${codesArr[currentActiveCard]._id}`
+    `/api/delete/${notes[currentActiveCard]._id}/${lastId}`
   );
   form.submit();
 }
@@ -226,7 +221,7 @@ function proceedUpdate() {
   let form = document.getElementById("update-card");
   form.setAttribute(
     "action",
-    `/api/update/${notes[currentActiveCard]._id}/${currentActiveCard}`
+    `/api/update/${notes[currentActiveCard]._id}/${lastId}`
   );
 
   form.submit();
@@ -249,3 +244,9 @@ hideAddBtn.addEventListener("click", () =>
 hideUpdateBtn.addEventListener("click", () =>
   addContainer2.classList.remove("show")
 );
+
+const createCardForm = document.getElementById("create-card-form");
+createCardForm.setAttribute("action", `note/${lastId}`);
+
+const clearCardForm = document.getElementById("clear-card-form");
+clearCardForm.setAttribute("action", `clear/${lastId}`);

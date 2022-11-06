@@ -5,10 +5,12 @@ const Notes = require("../models/Notes");
 
 // @route   POST /api/delete
 // @desc    Create short URL
-router.post("/:id", async (req, res) => {
-  const { id } = req.params;
+router.post("/:id/:_id", async (req, res) => {
+  const id = req.params["id"];
   await Notes.findByIdAndDelete(id);
-  res.redirect("/dashboard");
+
+  const title = req.params["_id"];
+  res.redirect(`/dashboard/${title}`);
 });
 
 module.exports = router;

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Cheat Code</title>
+  </head>
+  <body>
+    <div class="main-container-title">
+      <div class="flex-container" id="flex-container">
+        <!-- <div class="titles">Title</div> -->
+      </div>
+    </div>
+    <div class="plus-button">
+      <a class="button">
+        <svg class="arrow arrow-left" viewBox="0 0 448 448">
+          <path
+            d="M272 176H32c-18 0-32 14-32 32v32c0 18 14 32 32 32h144v144c0 18 14 32 32 32h32c18 0 32-14 32-32V176z"
+          />
+        </svg>
+
+        <svg class="arrow arrow-right" viewBox="0 0 448 448">
+          <path
+            d="M176 272h240c18 0 32-14 32-32v-32c0-18-14-32-32-32H272V32c0-18-14-32-32-32h-32c-18 0-32 14-32 32v240z"
+          />
+        </svg>
+      </a>
+      <form action="/api/title" method="POST" id="title-form">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          class="menu"
+          placeholder="Enter Title"
+        />
+      </form>
+    </div>
+  </body>
+  <script>
+    const button = document.querySelector(".plus-button");
+    button.querySelector(".button").addEventListener("click", (e) => {
+      button.classList.toggle("is-active");
+    });
+    let titles = `<%- JSON.stringify(titles) %>`;
+    titles = JSON.parse(titles);
+  </script>
+  <script src="../js/titles.js"></script>
+</html>

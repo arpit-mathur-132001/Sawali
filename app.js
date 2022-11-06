@@ -39,12 +39,13 @@ app.use(passport.session());
 
 // Define Routes
 app.use("/", require("./routes/index"));
-app.use("/api/note", require("./routes/note"));
-app.use("/api/clear", require("./routes/clear"));
-app.use("/api/clear_codes", require("./routes/clear_codes"));
+app.use("/dashboard/note", require("./routes/note"));
+app.use("/api/title", require("./routes/title"));
+app.use("/dashboard/clear", require("./routes/clear"));
+app.use("/dashboard/clear_codes", require("./routes/clear_codes"));
 app.use("/api/delete", require("./routes/delete"));
 app.use("/api/delete_code", require("./routes/delete_code"));
-app.use("/api/code", require("./routes/code"));
+app.use("/dashboard/code", require("./routes/code"));
 app.use("/api/update", require("./routes/update"));
 app.use("/api/update_code", require("./routes/update_code"));
 app.use("/auth", require("./routes/auth"));

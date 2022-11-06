@@ -9,8 +9,6 @@ const addContainer2 = document.getElementById("add-container2");
 
 const clearBtn = document.getElementById("clear");
 
-const lastId = document.getElementsByTagName("a")[0].baseURI.split("/").pop();
-
 // Store DOM cards
 const cardsEl = [];
 

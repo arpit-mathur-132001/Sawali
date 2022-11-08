@@ -242,7 +242,7 @@ function saveData() {
     hiddenCodeNumber.appendChild(hideCodeNumber);
 
     let form = document.getElementById("save-code");
-    form.setAttribute("action", `code/${lastId}`);
+    form.setAttribute("action", `code/${lastId}/${titleName}`);
 
     form.submit();
   });
@@ -308,7 +308,7 @@ function saveUpdatedData() {
     // form.setAttribute("action", `/api/code`);
     form.setAttribute(
       "action",
-      `/api/update_code/${codesArr[currentActiveCard]._id}/${lastId}`
+      `/api/update_code/${codesArr[currentActiveCard]._id}/${lastId}/${titleName}`
     );
 
     form.submit();
@@ -320,7 +320,7 @@ function proceedDeleteCode() {
   let form = document.getElementById("deleteCodeForm");
   form.setAttribute(
     "action",
-    `/api/delete_code/${codesArr[currentActiveCard]._id}/${lastId}`
+    `/api/delete_code/${codesArr[currentActiveCard]._id}/${lastId}/${titleName}`
   );
   form.submit();
 }
@@ -342,4 +342,4 @@ hideCodeBtn2.addEventListener("click", () =>
 );
 
 const clearCodeForm = document.getElementById("clear-code-form");
-clearCodeForm.setAttribute("action", `clear_codes/${lastId}`);
+clearCodeForm.setAttribute("action", `clear_codes/${lastId}/${titleName}`);

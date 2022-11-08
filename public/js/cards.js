@@ -209,7 +209,7 @@ function proceed() {
   let form = document.getElementById("deleteForm");
   form.setAttribute(
     "action",
-    `/api/delete/${notes[currentActiveCard]._id}/${lastId}`
+    `/api/delete/${notes[currentActiveCard]._id}/${lastId}/${titleName}`
   );
   form.submit();
 }
@@ -219,7 +219,7 @@ function proceedUpdate() {
   let form = document.getElementById("update-card");
   form.setAttribute(
     "action",
-    `/api/update/${notes[currentActiveCard]._id}/${lastId}`
+    `/api/update/${notes[currentActiveCard]._id}/${lastId}/${titleName}`
   );
 
   form.submit();
@@ -244,7 +244,7 @@ hideUpdateBtn.addEventListener("click", () =>
 );
 
 const createCardForm = document.getElementById("create-card-form");
-createCardForm.setAttribute("action", `note/${lastId}`);
+createCardForm.setAttribute("action", `note/${lastId}/${titleName}`);
 
 const clearCardForm = document.getElementById("clear-card-form");
-clearCardForm.setAttribute("action", `clear/${lastId}`);
+clearCardForm.setAttribute("action", `clear/${lastId}/${titleName}`);

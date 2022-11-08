@@ -5,13 +5,14 @@ const Codes = require("../models/Codes");
 
 // @route   POST /api/note/
 // @desc    Create short URL
-router.post("/:id", async (req, res) => {
+router.post("/:id/:titleName", async (req, res) => {
   let code = req.body.code.toString().replaceAll('"', '\\"');
   const input = req.body.input;
   const output = req.body.output;
   const number = req.body.number;
   const user = req.user.id;
   const title = req.params["id"];
+  const titleName = req.params["titleName"];
   try {
     const newCode = new Codes({
       code,
@@ -25,7 +26,7 @@ router.post("/:id", async (req, res) => {
 
     await newCode.save();
 
-    res.redirect(`/dashboard/${title}`);
+    res.redirect(`/dashboard/${title}?${titleName}`);
   } catch (err) {
     console.log(err);
     res.status(500).json("Server error");

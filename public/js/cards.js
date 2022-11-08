@@ -31,7 +31,7 @@ function createCard(note, index) {
   const card = document.createElement("div");
   card.classList.add("card");
 
-  if (index === 0) {
+  if (index === currentActiveCard) {
     card.classList.add("active");
   }
 
@@ -209,7 +209,9 @@ function proceed() {
   let form = document.getElementById("deleteForm");
   form.setAttribute(
     "action",
-    `/api/delete/${notes[currentActiveCard]._id}/${lastId}/${titleName}`
+    `/api/delete/${notes[currentActiveCard]._id}/${lastId}/${titleName}/${
+      currentActiveCard - 1
+    }`
   );
   form.submit();
 }
@@ -219,7 +221,7 @@ function proceedUpdate() {
   let form = document.getElementById("update-card");
   form.setAttribute(
     "action",
-    `/api/update/${notes[currentActiveCard]._id}/${lastId}/${titleName}`
+    `/api/update/${notes[currentActiveCard]._id}/${lastId}/${titleName}/${currentActiveCard}`
   );
 
   form.submit();
@@ -243,8 +245,17 @@ hideUpdateBtn.addEventListener("click", () =>
   addContainer2.classList.remove("show")
 );
 
-const createCardForm = document.getElementById("create-card-form");
-createCardForm.setAttribute("action", `note/${lastId}/${titleName}`);
-
 const clearCardForm = document.getElementById("clear-card-form");
 clearCardForm.setAttribute("action", `clear/${lastId}/${titleName}`);
+
+if (currentActiveCard - 1 !== -1) {
+  cardsEl[currentActiveCard - 1].className = "card left";
+  codesEl[currentActiveCard - 1].className = "code left";
+  inputEl[currentActiveCard - 1].className = "input-container left";
+}
+
+if (currentActiveCard + 1 !== cardsEl.length) {
+  cardsEl[currentActiveCard + 1].className = "card right";
+  codesEl[currentActiveCard + 1].className = "code right";
+  inputEl[currentActiveCard + 1].className = "input-container right";
+}

@@ -24,6 +24,11 @@ nextBtn.addEventListener("click", () => {
     inputEl[currentActiveCard].className = "input-container active";
 
     updateCurrentText();
+
+    createCardForm.setAttribute(
+      "action",
+      `note/${lastId}/${titleName}/${currentActiveCard}`
+    );
   }
 });
 
@@ -48,5 +53,10 @@ prevBtn.addEventListener("click", () => {
     inputEl[currentActiveCard].className = "input-container active";
 
     updateCurrentText();
+
+    createCardForm.setAttribute(
+      "action",
+      `note/${lastId}/${titleName}/${currentActiveCard}`
+    );
   }
 });

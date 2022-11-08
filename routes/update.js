@@ -5,10 +5,11 @@ const Notes = require("../models/Notes");
 
 // @route   POST /api/update/
 // @desc    Create short URL
-router.post("/:id/:_id/:titleName", async (req, res) => {
+router.post("/:id/:_id/:titleName/:activeCard", async (req, res) => {
   const question = req.body.ques;
   const answer = req.body.ans;
   const id = req.params.id;
+  const activeCard = req.params["activeCard"];
 
   const title = req.params["_id"];
   const titleName = req.params["titleName"];
@@ -17,7 +18,7 @@ router.post("/:id/:_id/:titleName", async (req, res) => {
       question: question,
       answer: answer,
     });
-    res.redirect(`/dashboard/${title}?${titleName}`);
+    res.redirect(`/dashboard/${title}?${titleName}?${activeCard}`);
   } catch (err) {
     console.log(err);
     res.status(500).json("Server error");

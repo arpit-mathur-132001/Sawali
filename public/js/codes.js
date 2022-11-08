@@ -23,7 +23,7 @@ function createCode(data, index) {
   const code = document.createElement("div");
   code.classList.add("code");
 
-  if (index === 0) {
+  if (index === currentActiveCard) {
     code.classList.add("active");
   }
 
@@ -59,7 +59,7 @@ function createCode(data, index) {
   inputContainer.classList.add("input-container");
   inputContainer.setAttribute("id", "input-container");
 
-  if (index === 0) {
+  if (index === currentActiveCard) {
     inputContainer.classList.add("active");
   }
 
@@ -242,7 +242,10 @@ function saveData() {
     hiddenCodeNumber.appendChild(hideCodeNumber);
 
     let form = document.getElementById("save-code");
-    form.setAttribute("action", `code/${lastId}/${titleName}`);
+    form.setAttribute(
+      "action",
+      `code/${lastId}/${titleName}/${currentActiveCard}`
+    );
 
     form.submit();
   });
@@ -308,7 +311,7 @@ function saveUpdatedData() {
     // form.setAttribute("action", `/api/code`);
     form.setAttribute(
       "action",
-      `/api/update_code/${codesArr[currentActiveCard]._id}/${lastId}/${titleName}`
+      `/api/update_code/${codesArr[currentActiveCard]._id}/${lastId}/${titleName}/${currentActiveCard}`
     );
 
     form.submit();
@@ -320,7 +323,9 @@ function proceedDeleteCode() {
   let form = document.getElementById("deleteCodeForm");
   form.setAttribute(
     "action",
-    `/api/delete_code/${codesArr[currentActiveCard]._id}/${lastId}/${titleName}`
+    `/api/delete_code/${
+      codesArr[currentActiveCard]._id
+    }/${lastId}/${titleName}/${currentActiveCard - 1}`
   );
   form.submit();
 }

@@ -27,7 +27,7 @@ nextBtn.addEventListener("click", () => {
 
     createCardForm.setAttribute(
       "action",
-      `note/${lastId}/${titleName}/${currentActiveCard}`
+      `note/${lastId}/${titleName}/${currentActiveCard + 1}`
     );
   }
 });
@@ -56,7 +56,7 @@ prevBtn.addEventListener("click", () => {
 
     createCardForm.setAttribute(
       "action",
-      `note/${lastId}/${titleName}/${currentActiveCard}`
+      `note/${lastId}/${titleName}/${currentActiveCard + 1}`
     );
   }
 });

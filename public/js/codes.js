@@ -187,7 +187,7 @@ function getData2() {
 
 // Save output of code
 function saveData() {
-  let code = edit1.getValue().toString().replaceAll('"', '\\"');
+  let code = edit1.getValue();
   let input = textareaInput.value;
   let language = languageSelect.value;
 
@@ -213,6 +213,7 @@ function saveData() {
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
+    code = edit2.getValue().toString().replaceAll('"', '\\"');
     hiddenCode = document.getElementById("hidden-code");
     const hideCode = document.createElement("textarea");
     hideCode.innerHTML = `${code}`;
@@ -253,7 +254,7 @@ function saveData() {
 
 // Save output of updated code
 function saveUpdatedData() {
-  let code = edit2.getValue().toString().replaceAll('"', '\\"');
+  let code = edit2.getValue();
   let input = textareaInput2.value;
   let language = languageSelect.value;
 
@@ -279,6 +280,7 @@ function saveUpdatedData() {
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
+    code = edit2.getValue().toString().replaceAll('"', '\\"');
     hiddenCode = document.getElementById("hidden-updated-code");
     const hideCode = document.createElement("textarea");
     hideCode.innerHTML = `${code}`;

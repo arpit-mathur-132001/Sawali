@@ -6,7 +6,7 @@ const Codes = require("../models/Codes");
 // @route   POST /api/update_code/
 // @desc    Create short URL
 router.post("/:id/:_id/:titleName/:activeCard", async (req, res) => {
-  let code = req.body.code.toString().replaceAll('"', '\\"');
+  let code = req.body.code;
   const input = req.body.input;
   const output = req.body.output;
   const id = req.params.id;

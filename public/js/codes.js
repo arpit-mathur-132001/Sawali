@@ -213,9 +213,9 @@ function saveData() {
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
-    code = edit2.getValue().toString().replaceAll('"', '\\"');
     hiddenCode = document.getElementById("hidden-code");
     const hideCode = document.createElement("textarea");
+    code = code.toString().replaceAll('"', '\\"');
     hideCode.innerHTML = `${code}`;
     hideCode.name = "code";
     hideCode.type = "hidden";
@@ -280,9 +280,9 @@ function saveUpdatedData() {
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
-    code = edit2.getValue().toString().replaceAll('"', '\\"');
     hiddenCode = document.getElementById("hidden-updated-code");
     const hideCode = document.createElement("textarea");
+    code = code.toString().replaceAll('"', '\\"');
     hideCode.innerHTML = `${code}`;
     hideCode.name = "code";
     hideCode.type = "hidden";

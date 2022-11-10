@@ -9,8 +9,7 @@ module.exports = function (passport) {
       {
         clientID: config.get("GOOGLE_CLIENT_ID"),
         clientSecret: config.get("GOOGLE_CLIENT_SECRET"),
-        callbackURL:
-          "https://misty-fly-sandals.cyclic.app/auth/google/callback",
+        callbackURL: "/auth/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {

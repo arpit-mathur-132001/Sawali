@@ -187,7 +187,7 @@ function getData2() {
 
 // Save output of code
 function saveData() {
-  let code = edit1.getValue();
+  let code = edit1.getValue().toString().replaceAll('"', '\\"');
   let input = textareaInput.value;
   let language = languageSelect.value;
 
@@ -253,7 +253,7 @@ function saveData() {
 
 // Save output of updated code
 function saveUpdatedData() {
-  let code = edit2.getValue();
+  let code = edit2.getValue().toString().replaceAll('"', '\\"');
   let input = textareaInput2.value;
   let language = languageSelect.value;
 

@@ -6,7 +6,6 @@ const Codes = require("../models/Codes");
 // @route   POST /api/note/
 // @desc    Create short URL
 router.post("/:id/:titleName/:activeCard", async (req, res) => {
-  let code = req.body.code.toString().replaceAll('"', '\\"');
   const input = req.body.input;
   const output = req.body.output;
   const number = req.body.number;

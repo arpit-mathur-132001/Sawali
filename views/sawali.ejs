@@ -4,38 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="../css/style.css" />
     <title>Cheat Code</title>
   </head>
   <body>
-    <div class="main-container-title">
-      <div class="flex-container" id="flex-container">
-        <!-- <div class="titles">Title</div> -->
-      </div>
-    </div>
-    <div class="plus-button">
-      <a class="button">
-        <svg class="arrow arrow-left" viewBox="0 0 448 448">
-          <path
-            d="M272 176H32c-18 0-32 14-32 32v32c0 18 14 32 32 32h144v144c0 18 14 32 32 32h32c18 0 32-14 32-32V176z"
-          />
-        </svg>
-
-        <svg class="arrow arrow-right" viewBox="0 0 448 448">
-          <path
-            d="M176 272h240c18 0 32-14 32-32v-32c0-18-14-32-32-32H272V32c0-18-14-32-32-32h-32c-18 0-32 14-32 32v240z"
-          />
-        </svg>
+    <div class="lines" id="flex-head">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <!-- Google auth -->
+      <a href="/auth/logout" id="google-out-first">
+        <button class="btn-logout" type="submit">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
       </a>
-      <form action="/api/title" method="POST" id="title-form">
-        <input
-          type="text"
-          name="title"
-          id="title"
-          class="menu"
-          placeholder="Enter Title"
-        />
-      </form>
+
+      <div class="main-container-title">
+        <div class="flex-container" id="flex-container">
+          <!-- <div class="titles">Title</div> -->
+        </div>
+      </div>
+      <div class="plus-button">
+        <a class="button">
+          <svg class="arrow arrow-left" viewBox="0 0 448 448">
+            <path
+              d="M272 176H32c-18 0-32 14-32 32v32c0 18 14 32 32 32h144v144c0 18 14 32 32 32h32c18 0 32-14 32-32V176z"
+            />
+          </svg>
+
+          <svg class="arrow arrow-right" viewBox="0 0 448 448">
+            <path
+              d="M176 272h240c18 0 32-14 32-32v-32c0-18-14-32-32-32H272V32c0-18-14-32-32-32h-32c-18 0-32 14-32 32v240z"
+            />
+          </svg>
+
+          <svg
+            viewBox="0 0 26 26"
+            xmlns="http://www.w3.org/2000/svg"
+            id="tick-submit"
+          >
+            <g
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              fill-rule="evenodd"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                class="circle"
+                d="M13 1C6.372583 1 1 6.372583 1 13s5.372583 12 12 12 12-5.372583 12-12S19.627417 1 13 1z"
+              />
+              <path class="tick" d="M6.5 13.5L10 17 l8.808621-8.308621" />
+            </g>
+          </svg>
+        </a>
+        <form action="/api/title" method="POST" id="title-form">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            class="menu"
+            placeholder="Enter Title"
+          />
+        </form>
+      </div>
     </div>
   </body>
   <script>

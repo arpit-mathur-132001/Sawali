@@ -36,7 +36,7 @@ function createCode(data, index) {
           </code>
         </pre>
 
-        <div class="inner-code-back"><xmp style="margin:0">${data.output}</xmp></div>
+        <div class="inner-code-back"><xmp style="margin:0; white-space:break-spaces">${data.output}</xmp></div>
 
       </div>
       `;

@@ -18,6 +18,11 @@
     <title>Cheat Code</title>
   </head>
   <body>
+    <div class="lines" id="flex-head" style="position: absolute">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
     <!-- Back button -->
     <a href="/sawali" id="back-button">
       <button class="btn-logout" type="submit">
@@ -139,6 +144,11 @@
 
     <!-- Saving a New Card -->
     <div id="add-container1" class="add-container">
+      <div class="lines" id="flex-head" style="position: absolute; z-index: -1">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
       <h1 id="new-card-title">
         Add New Card
         <button id="hideAdd" class="btn btn-small btn-ghost">
@@ -148,7 +158,7 @@
 
       <form action="" method="POST" id="create-card-form">
         <div class="form-group">
-          <label for="question">Question</label>
+          <label for="question" style="font-size: 25px">Question</label>
           <textarea
             placeholder="Enter question..."
             name="ques"
@@ -160,7 +170,7 @@
         </div>
 
         <div class="form-group">
-          <label for="answer">Answer</label>
+          <label for="answer" style="font-size: 25px">Answer</label>
           <textarea
             placeholder="Enter Answer..."
             name="ans"
@@ -171,7 +181,12 @@
           <div id="lineNo2"></div>
         </div>
 
-        <button id="add-card" class="btn" type="submit">
+        <button
+          id="add-card"
+          class="btn"
+          type="submit"
+          style="margin-top: 10px"
+        >
           <i class="fas fa-plus"></i> Add Card
         </button>
       </form>
@@ -179,16 +194,21 @@
 
     <!-- Updating a new card -->
     <div id="add-container2" class="add-container">
-      <h1>
+      <div class="lines" id="flex-head" style="position: absolute; z-index: -1">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <h1 id="update-card-title">
         Update This Card
         <button id="hideUpdate" class="btn btn-small btn-ghost">
           <i class="fas fa-times"></i>
         </button>
       </h1>
 
-      <form method="POST" id="update-card">
+      <form method="POST" id="update-card" style="color: white">
         <div class="form-group">
-          <label for="question">Question</label>
+          <label for="question" style="font-size: 25px">Question</label>
           <textarea
             placeholder="Enter question..."
             name="ques"
@@ -200,7 +220,7 @@
         </div>
 
         <div class="form-group">
-          <label for="answer">Answer</label>
+          <label for="answer" style="font-size: 25px">Answer</label>
           <textarea
             placeholder="Enter Answer..."
             name="ans"
@@ -216,6 +236,7 @@
           class="btn"
           type="button"
           onclick="proceedUpdate()"
+          style="margin-top: 10px"
         >
           <i class="fas fa-edit"></i> Update Card
         </button>
@@ -224,6 +245,12 @@
 
     <!-- Coding a new code -->
     <div id="add-container3" class="add-container">
+      <div class="lines" id="flex-head" style="position: absolute; z-index: -1">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+
       <h1 class="codeh1">
         Write Code
         <button id="hideCode1" class="btn btn-small btn-ghost">
@@ -263,6 +290,12 @@
 
     <!-- Update code -->
     <div id="add-container4" class="add-container">
+      <div class="lines" id="flex-head" style="position: absolute; z-index: -1">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+
       <h1 class="codeh1">
         Update Code
         <button id="hideCode2" class="btn btn-small btn-ghost">

@@ -38,7 +38,7 @@ function createCard(note, index) {
   card.innerHTML = `
       <div class="inner-card">
         <div class="inner-card-front">
-          <xmp style="margin:0; white-space:break-spaces; overflow: auto">${note.question}</xmp>
+          <div style="margin:0; white-space:break-spaces; overflow: auto">${note.question}</div>
         </div>
         <div class="inner-card-back">
           <xmp style="margin:0; white-space:break-spaces; overflow: auto">${note.answer}</xmp>
@@ -83,42 +83,42 @@ let currPos;
 let enterArr;
 let checkBullet;
 
-function getLineNumber(textarea, indicator) {
-  len = textarea.value.substr(0, textarea.selectionStart).split("\n").length;
-  currPos = textarea.selectionStart;
+// function getLineNumber(textarea, indicator) {
+//   len = textarea.value.substr(0, textarea.selectionStart).split("\n").length;
+//   currPos = textarea.selectionStart;
 
-  arr = textarea.value.split("\n");
-  enterArr = textarea.value.substr(0, textarea.selectionStart).split("\n");
-  checkBullet = enterArr[len - 1][0];
-}
+//   arr = textarea.value.split("\n");
+//   enterArr = textarea.value.substr(0, textarea.selectionStart).split("\n");
+//   checkBullet = enterArr[len - 1][0];
+// }
 
-const questionBullet = document.getElementById("question");
+// const questionBullet = document.getElementById("question");
 
-questionBullet.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && e.shiftKey && e.key === "L") {
-    arr[len - 1] = "• " + arr[len - 1];
+// questionBullet.addEventListener("keydown", function (e) {
+//   if (e.ctrlKey && e.shiftKey && e.key === "L") {
+//     arr[len - 1] = "• " + arr[len - 1];
 
-    questionBullet.value = "";
+//     questionBullet.value = "";
 
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] != arr[arr.length - 1]) {
-        questionBullet.value = questionBullet.value + arr[i] + "\n";
-      } else {
-        questionBullet.value = questionBullet.value + arr[i];
-      }
-    }
-    questionBullet.selectionEnd = currPos + 2;
-  }
-  if (e.which === 13) {
-    if (checkBullet === "•" && arr[len - 1] !== "• ") {
-      e.preventDefault();
-      questionBullet.value = questionBullet.value + "\n• ";
-    } else if (arr[len - 1] === "• ") {
-      e.preventDefault();
-      questionBullet.value = questionBullet.value.slice(0, -2);
-    }
-  }
-});
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] != arr[arr.length - 1]) {
+//         questionBullet.value = questionBullet.value + arr[i] + "\n";
+//       } else {
+//         questionBullet.value = questionBullet.value + arr[i];
+//       }
+//     }
+//     questionBullet.selectionEnd = currPos + 2;
+//   }
+//   if (e.which === 13) {
+//     if (checkBullet === "•" && arr[len - 1] !== "• ") {
+//       e.preventDefault();
+//       questionBullet.value = questionBullet.value + "\n• ";
+//     } else if (arr[len - 1] === "• ") {
+//       e.preventDefault();
+//       questionBullet.value = questionBullet.value.slice(0, -2);
+//     }
+//   }
+// });
 
 const answerBullet = document.getElementById("answer");
 

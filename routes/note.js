@@ -6,7 +6,7 @@ const Notes = require("../models/Notes");
 // @route   POST /api/note/
 // @desc    Create short URL
 router.post("/:id/:titleName/:activeCard", async (req, res) => {
-  const question = req.body.ques;
+  const question = req.body.ques.replaceAll(/"/g, "'");
   const answer = req.body.ans;
   const user = req.user.id;
   const title = req.params["id"];

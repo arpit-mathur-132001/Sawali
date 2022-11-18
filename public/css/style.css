@@ -310,14 +310,21 @@ body {
 
 .inner-code-back::after,
 .inner-code-front::after {
-  content: "\f021  Flip";
   font-family: "Font Awesome 5 Free", Lato, sans-serif;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
   font-weight: bold;
-  font-size: 16px;
-  color: #ddd;
+  font-size: 14px;
+  color: #999;
+}
+
+.inner-code-back::after {
+  content: "\f021  Output";
+}
+
+.inner-code-front::after {
+  content: "\f021  Code";
 }
 
 .input-container {
@@ -596,14 +603,21 @@ xmp::-webkit-scrollbar {
 
 .inner-card-front::after,
 .inner-card-back::after {
-  content: "\f021  Flip";
   font-family: "Font Awesome 5 Free", Lato, sans-serif;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
   font-weight: bold;
-  font-size: 16px;
-  color: #ddd;
+  font-size: 14px;
+  color: #999;
+}
+
+.inner-card-back::after {
+  content: "\f021  Answer";
+}
+
+.inner-card-front::after {
+  content: "\f021  Question";
 }
 
 .nav-button {
@@ -651,6 +665,49 @@ xmp::-webkit-scrollbar {
 }
 
 .form-group textarea {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 12px;
+  width: 1100px;
+  height: 260px;
+  resize: none;
+  color: white;
+  box-shadow: 0 0.18em 0.37em rgb(13 44 84 / 16%),
+    0 0.18em 0.37em rgb(13 44 84 / 23%);
+  background: rgba(1, 1, 1);
+  font-size: 20px;
+}
+
+.note-editable {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 12px;
+  width: 1100px;
+  height: 260px;
+  resize: none;
+  color: white;
+  box-shadow: 0 0.18em 0.37em rgb(13 44 84 / 16%),
+    0 0.18em 0.37em rgb(13 44 84 / 23%);
+  background: rgba(1, 1, 1);
+  font-size: 20px;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding-inline-start: 21px;
+  margin: 0;
+}
+
+.note-statusbar {
+  display: none;
+}
+
+#questions {
   border: 1px solid #aaa;
   border-radius: 3px;
   font-size: 16px;

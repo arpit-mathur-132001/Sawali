@@ -15,6 +15,16 @@
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
     />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <title>Cheat Code</title>
   </head>
   <body>
@@ -213,8 +223,6 @@
             placeholder="Enter question..."
             name="ques"
             id="ques"
-            onkeyup="getLineNumber(this, document.getElementById('lineNo1'));"
-            onmouseup="this.onkeyup();"
           ></textarea>
           <div id="lineNo1"></div>
         </div>
@@ -363,6 +371,12 @@
 
     let titles = `<%- JSON.stringify(titles) %>`;
     titles = JSON.parse(titles);
+  </script>
+  <script>
+    $("#question").summernote({
+      tabsize: 2,
+      toolbar: [],
+    });
   </script>
   <script src="../../js/script.js"></script>
   <script src="../../js/prev-next.js"></script>

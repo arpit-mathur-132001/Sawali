@@ -83,6 +83,12 @@ let currPos;
 let enterArr;
 let checkBullet;
 
+addCard = document.getElementById("add-card");
+addCard.addEventListener("click", () => {
+  let questionBullet = document.getElementById("question");
+  questionBullet.value = questionBullet.value.replaceAll(/"/g, "'");
+});
+
 // function getLineNumber(textarea, indicator) {
 //   len = textarea.value.substr(0, textarea.selectionStart).split("\n").length;
 //   currPos = textarea.selectionStart;

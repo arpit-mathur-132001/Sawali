@@ -15,7 +15,13 @@ connectDB();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
-app.use(express.urlencoded({ extended: false }));
+app.use(
+  express.urlencoded({
+    extended: true,
+    parameterLimit: 100000,
+    limit: "500mb",
+  })
+);
 
 app.use(express.json({ extended: false }));
 app.use(express.static(path.join(__dirname, "/public")));

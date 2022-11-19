@@ -41,7 +41,7 @@ function createCard(note, index) {
           <div style="margin:0; white-space:break-spaces; overflow: auto">${note.question}</div>
         </div>
         <div class="inner-card-back">
-          <xmp style="margin:0; white-space:break-spaces; overflow: auto">${note.answer}</xmp>
+          <div style="margin:0; white-space:break-spaces; overflow: auto">${note.answer}</div>
         </div>
       </div>
       `;
@@ -65,15 +65,23 @@ const ques = document.getElementById("ques");
 const ans = document.getElementById("ans");
 
 if (currentActiveCard === 0 && notes.length !== 0) {
-  ques.value = notes[currentActiveCard].question;
-  ans.value = notes[currentActiveCard].answer;
+  // ques.value = notes[currentActiveCard].question;
+  // ans.value = notes[currentActiveCard].answer;
+  $("#ques").summernote("code", "");
+  $("#ques").summernote("pasteHTML", notes[currentActiveCard].question);
+  $("#ans").summernote("code", "");
+  $("#ans").summernote("pasteHTML", notes[currentActiveCard].answer);
 }
 
 // Update card number
 function updateCardText(num) {
   if (currentActiveCard !== -1 && currentActiveCard !== notes.length) {
-    ques.value = notes[currentActiveCard].question;
-    ans.value = notes[currentActiveCard].answer;
+    // ques.value = notes[currentActiveCard].question;
+    // ans.value = notes[currentActiveCard].answer;
+    $("#ques").summernote("code", "");
+    $("#ques").summernote("pasteHTML", notes[currentActiveCard].question);
+    $("#ans").summernote("code", "");
+    $("#ans").summernote("pasteHTML", notes[currentActiveCard].answer);
   }
 }
 
@@ -87,6 +95,8 @@ addCard = document.getElementById("add-card");
 addCard.addEventListener("click", () => {
   let questionBullet = document.getElementById("question");
   questionBullet.value = questionBullet.value.replaceAll(/"/g, "'");
+  let answerBullet = document.getElementById("answer");
+  answerBullet.value = answerBullet.value.replaceAll(/"/g, "'");
 });
 
 // function getLineNumber(textarea, indicator) {
@@ -126,89 +136,89 @@ addCard.addEventListener("click", () => {
 //   }
 // });
 
-const answerBullet = document.getElementById("answer");
+// const answerBullet = document.getElementById("answer");
 
-answerBullet.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && e.shiftKey && e.key === "L") {
-    arr[len - 1] = "• " + arr[len - 1];
+// answerBullet.addEventListener("keydown", function (e) {
+//   if (e.ctrlKey && e.shiftKey && e.key === "L") {
+//     arr[len - 1] = "• " + arr[len - 1];
 
-    answerBullet.value = "";
+//     answerBullet.value = "";
 
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] != arr[arr.length - 1]) {
-        answerBullet.value = answerBullet.value + arr[i] + "\n";
-      } else {
-        answerBullet.value = answerBullet.value + arr[i];
-      }
-    }
-    answerBullet.selectionEnd = currPos + 2;
-  }
-  if (e.which === 13) {
-    if (checkBullet === "•" && arr[len - 1] !== "• ") {
-      e.preventDefault();
-      answerBullet.value = answerBullet.value + "\n• ";
-    } else if (arr[len - 1] === "• ") {
-      e.preventDefault();
-      answerBullet.value = answerBullet.value.slice(0, -2);
-    }
-  }
-});
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] != arr[arr.length - 1]) {
+//         answerBullet.value = answerBullet.value + arr[i] + "\n";
+//       } else {
+//         answerBullet.value = answerBullet.value + arr[i];
+//       }
+//     }
+//     answerBullet.selectionEnd = currPos + 2;
+//   }
+//   if (e.which === 13) {
+//     if (checkBullet === "•" && arr[len - 1] !== "• ") {
+//       e.preventDefault();
+//       answerBullet.value = answerBullet.value + "\n• ";
+//     } else if (arr[len - 1] === "• ") {
+//       e.preventDefault();
+//       answerBullet.value = answerBullet.value.slice(0, -2);
+//     }
+//   }
+// });
 
-const questionUpdateBullet = document.getElementById("ques");
+// const questionUpdateBullet = document.getElementById("ques");
 
-questionUpdateBullet.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && e.shiftKey && e.key === "L") {
-    arr[len - 1] = "• " + arr[len - 1];
+// questionUpdateBullet.addEventListener("keydown", function (e) {
+//   if (e.ctrlKey && e.shiftKey && e.key === "L") {
+//     arr[len - 1] = "• " + arr[len - 1];
 
-    questionUpdateBullet.value = "";
+//     questionUpdateBullet.value = "";
 
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] != arr[arr.length - 1]) {
-        questionUpdateBullet.value = questionUpdateBullet.value + arr[i] + "\n";
-      } else {
-        questionUpdateBullet.value = questionUpdateBullet.value + arr[i];
-      }
-    }
-    questionUpdateBullet.selectionEnd = currPos + 2;
-  }
-  if (e.which === 13) {
-    if (checkBullet === "•" && arr[len - 1] !== "• ") {
-      e.preventDefault();
-      questionUpdateBullet.value = questionUpdateBullet.value + "\n• ";
-    } else if (arr[len - 1] === "• ") {
-      e.preventDefault();
-      questionUpdateBullet.value = questionUpdateBullet.value.slice(0, -2);
-    }
-  }
-});
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] != arr[arr.length - 1]) {
+//         questionUpdateBullet.value = questionUpdateBullet.value + arr[i] + "\n";
+//       } else {
+//         questionUpdateBullet.value = questionUpdateBullet.value + arr[i];
+//       }
+//     }
+//     questionUpdateBullet.selectionEnd = currPos + 2;
+//   }
+//   if (e.which === 13) {
+//     if (checkBullet === "•" && arr[len - 1] !== "• ") {
+//       e.preventDefault();
+//       questionUpdateBullet.value = questionUpdateBullet.value + "\n• ";
+//     } else if (arr[len - 1] === "• ") {
+//       e.preventDefault();
+//       questionUpdateBullet.value = questionUpdateBullet.value.slice(0, -2);
+//     }
+//   }
+// });
 
-const answerUpdateBullet = document.getElementById("ans");
+// const answerUpdateBullet = document.getElementById("ans");
 
-answerUpdateBullet.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && e.shiftKey && e.key === "L") {
-    arr[len - 1] = "• " + arr[len - 1];
+// answerUpdateBullet.addEventListener("keydown", function (e) {
+//   if (e.ctrlKey && e.shiftKey && e.key === "L") {
+//     arr[len - 1] = "• " + arr[len - 1];
 
-    answerUpdateBullet.value = "";
+//     answerUpdateBullet.value = "";
 
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] != arr[arr.length - 1]) {
-        answerUpdateBullet.value = answerUpdateBullet.value + arr[i] + "\n";
-      } else {
-        answerUpdateBullet.value = answerUpdateBullet.value + arr[i];
-      }
-    }
-    answerUpdateBullet.selectionEnd = currPos + 2;
-  }
-  if (e.which === 13) {
-    if (checkBullet === "•" && arr[len - 1] !== "• ") {
-      e.preventDefault();
-      answerUpdateBullet.value = answerUpdateBullet.value + "\n• ";
-    } else if (arr[len - 1] === "• ") {
-      e.preventDefault();
-      answerUpdateBullet.value = answerUpdateBullet.value.slice(0, -2);
-    }
-  }
-});
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] != arr[arr.length - 1]) {
+//         answerUpdateBullet.value = answerUpdateBullet.value + arr[i] + "\n";
+//       } else {
+//         answerUpdateBullet.value = answerUpdateBullet.value + arr[i];
+//       }
+//     }
+//     answerUpdateBullet.selectionEnd = currPos + 2;
+//   }
+//   if (e.which === 13) {
+//     if (checkBullet === "•" && arr[len - 1] !== "• ") {
+//       e.preventDefault();
+//       answerUpdateBullet.value = answerUpdateBullet.value + "\n• ";
+//     } else if (arr[len - 1] === "• ") {
+//       e.preventDefault();
+//       answerUpdateBullet.value = answerUpdateBullet.value.slice(0, -2);
+//     }
+//   }
+// });
 
 // Delete card
 function proceed() {
@@ -224,6 +234,11 @@ function proceed() {
 
 // Update card
 function proceedUpdate() {
+  let questionUpdateBullet = document.getElementById("ques");
+  questionUpdateBullet.value = questionUpdateBullet.value.replaceAll(/"/g, "'");
+  let answerUpdateBullet = document.getElementById("ans");
+  answerUpdateBullet.value = answerUpdateBullet.value.replaceAll(/"/g, "'");
+
   let form = document.getElementById("update-card");
   form.setAttribute(
     "action",

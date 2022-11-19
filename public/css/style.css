@@ -247,6 +247,17 @@ body {
   z-index: 1;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+div::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+div {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .main-code {
   margin: auto;
   -webkit-text-stroke: 1px black;
@@ -703,6 +714,10 @@ ul {
   margin: 0;
 }
 
+.note-image-popover {
+  background: white;
+}
+
 .note-statusbar {
   display: none;
 }
@@ -902,7 +917,7 @@ ul {
 .top {
   clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
 }
-.bottom {
+.bottom-sawali {
   clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
   color: transparent;
   background: -webkit-linear-gradient(177deg, black 53%, var(--text-color) 65%);

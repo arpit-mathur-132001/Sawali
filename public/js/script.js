@@ -22,7 +22,13 @@ let currentActiveCard = document
 currentActiveCard = parseInt(currentActiveCard);
 
 let createCardForm = document.getElementById("create-card-form");
-createCardForm.setAttribute(
-  "action",
-  `note/${lastId}/${titleName}/${currentActiveCard + 1}`
-);
+console.log(currentActiveCard);
+console.log(document.getElementById("current").innerText);
+if (document.getElementById("current").innerText !== "") {
+  createCardForm.setAttribute(
+    "action",
+    `note/${lastId}/${titleName}/${currentActiveCard + 1}`
+  );
+} else {
+  createCardForm.setAttribute("action", `note/${lastId}/${titleName}/${0}`);
+}

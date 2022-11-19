@@ -48,6 +48,12 @@ prevBtn.addEventListener("click", () => {
       currentActiveCard = 0;
     }
 
+    if (currentActiveCard !== 0) {
+      cardsEl[currentActiveCard - 1].className = "card left";
+      codesEl[currentActiveCard - 1].className = "code left";
+      inputEl[currentActiveCard - 1].className = "input-container left";
+    }
+
     cardsEl[currentActiveCard].className = "card active";
     codesEl[currentActiveCard].className = "code active";
     inputEl[currentActiveCard].className = "input-container active";

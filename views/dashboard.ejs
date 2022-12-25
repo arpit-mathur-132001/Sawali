@@ -62,7 +62,13 @@
               <i class="fas fa-edit"></i> Update This Card
             </button>
 
-            <h1 class="main">Q</h1>
+            <button id="show5" class="btn btn-small btn1 main">
+              <i
+                class="fas fa-expand"
+                style="font-size: 20px"
+                id="cards-expand"
+              ></i>
+            </button>
 
             <button id="show1" class="btn btn-small btn2">
               <i class="fas fa-plus"></i> Add New Card
@@ -87,6 +93,19 @@
               </form>
             </div>
 
+            <!-- Previous-Next buttons -->
+            <div class="prev-next" id="prev-next-2">
+              <button id="prev-2" class="nav-button">
+                <i class="fas fa-arrow-left"></i>
+              </button>
+
+              <p id="current2"></p>
+
+              <button id="next-2" class="nav-button">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+
             <!-- Clear cards -->
             <form action="/api/clear" method="POST" id="clear-card-form">
               <button id="clear" class="btn btn-small btn3" type="submit">
@@ -97,14 +116,14 @@
         </div>
 
         <!-- Previous-Next buttons -->
-        <div class="prev-next" id="prev-next">
-          <button id="prev" class="nav-button">
+        <div class="prev-next" id="prev-next-1">
+          <button id="prev-1" class="nav-button">
             <i class="fas fa-arrow-left"></i>
           </button>
 
           <p id="current"></p>
 
-          <button id="next" class="nav-button">
+          <button id="next-1" class="nav-button">
             <i class="fas fa-arrow-right"></i>
           </button>
         </div>
@@ -116,11 +135,19 @@
             <button id="show4" class="btn btn-small btn1">
               <i class="fas fa-edit"></i> Update This Code
             </button>
-            <h1 class="main-code">Code</h1>
+
+            <button id="show6" class="btn btn-small btn1 main">
+              <i
+                class="fas fa-expand"
+                id="codes-expand"
+                style="font-size: 20px"
+              ></i>
+            </button>
+
             <button id="show3" class="btn btn-small btn2" type="button">
               <i class="fas fa-code"></i> Add New Code
             </button>
-            <h1 class="main-input">Input</h1>
+            <h1 class="main-input"></h1>
           </div>
 
           <!-- Codes mid-container -->
@@ -139,6 +166,19 @@
                   <i class="fas fa-trash"></i> Delete This Code
                 </button>
               </form>
+            </div>
+
+            <!-- Previous-Next buttons -->
+            <div class="prev-next" id="prev-next-3">
+              <button id="prev-3" class="nav-button">
+                <i class="fas fa-arrow-left"></i>
+              </button>
+
+              <p id="current3"></p>
+
+              <button id="next-3" class="nav-button">
+                <i class="fas fa-arrow-right"></i>
+              </button>
             </div>
 
             <!-- Clear codes -->

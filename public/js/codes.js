@@ -130,6 +130,9 @@ let op;
 const textareaInput = document.getElementById("textareaInput");
 const output = document.querySelector(".output");
 const languageSelect = document.querySelector("#language");
+let err;
+
+const proxy = "https://cors-anywhere.herokuapp.com/";
 
 function getData1() {
   let code = edit1.getValue();
@@ -140,9 +143,13 @@ function getData1() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    code: code,
+    clientId: "90418c7480bd066d156a178ee9a0c856",
+    clientSecret:
+      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
+    script: code,
     language: language,
-    input: input,
+    stdin: input,
+    versionIndex: "0",
   });
 
   var requestOptions = {
@@ -152,9 +159,14 @@ function getData1() {
     redirect: "follow",
   };
 
-  fetch("https://codex-api.herokuapp.com/", requestOptions)
+  fetch(proxy + "https://api.jdoodle.com/v1/execute", requestOptions)
     .then((response) => response.text())
-    .then((result) => (output.innerText = JSON.parse(result).output))
+    .then(
+      (result) =>
+        (output.innerText = JSON.parse(result).output
+          ? JSON.parse(result).output
+          : JSON.parse(result).error)
+    )
     .catch((error) => console.log("error", error));
 }
 
@@ -167,9 +179,13 @@ function getData2() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    code: code,
+    clientId: "90418c7480bd066d156a178ee9a0c856",
+    clientSecret:
+      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
+    script: code,
     language: language,
-    input: input,
+    stdin: input,
+    versionIndex: "0",
   });
 
   var requestOptions = {
@@ -179,9 +195,14 @@ function getData2() {
     redirect: "follow",
   };
 
-  fetch("https://codex-api.herokuapp.com/", requestOptions)
+  fetch(proxy + "https://api.jdoodle.com/v1/execute", requestOptions)
     .then((response) => response.text())
-    .then((result) => (updateOutput.innerText = JSON.parse(result).output))
+    .then(
+      (result) =>
+        (updateOutput.innerText = JSON.parse(result).output
+          ? JSON.parse(result).output
+          : JSON.parse(result).error)
+    )
     .catch((error) => console.log("error", error));
 }
 
@@ -195,9 +216,13 @@ function saveData() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    code: code,
+    clientId: "90418c7480bd066d156a178ee9a0c856",
+    clientSecret:
+      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
+    script: code,
     language: language,
-    input: input,
+    stdin: input,
+    versionIndex: "0",
   });
 
   var requestOptions = {
@@ -207,9 +232,17 @@ function saveData() {
     redirect: "follow",
   };
 
-  const res = fetch("https://codex-api.herokuapp.com/", requestOptions)
+  const res = fetch(
+    proxy + "https://api.jdoodle.com/v1/execute",
+    requestOptions
+  )
     .then((response) => response.text())
-    .then((result) => (output.innerText = JSON.parse(result).output))
+    .then(
+      (result) =>
+        (output.innerText = JSON.parse(result).output
+          ? JSON.parse(result).output
+          : JSON.parse(result).error)
+    )
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
@@ -262,9 +295,13 @@ function saveUpdatedData() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    code: code,
+    clientId: "90418c7480bd066d156a178ee9a0c856",
+    clientSecret:
+      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
+    script: code,
     language: language,
-    input: input,
+    stdin: input,
+    versionIndex: "0",
   });
 
   var requestOptions = {
@@ -274,9 +311,17 @@ function saveUpdatedData() {
     redirect: "follow",
   };
 
-  const res = fetch("https://codex-api.herokuapp.com/", requestOptions)
+  const res = fetch(
+    proxy + "https://api.jdoodle.com/v1/execute",
+    requestOptions
+  )
     .then((response) => response.text())
-    .then((result) => (output.innerText = JSON.parse(result).output))
+    .then(
+      (result) =>
+        (output.innerText = JSON.parse(result).output
+          ? JSON.parse(result).output
+          : JSON.parse(result).error)
+    )
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
@@ -350,3 +395,56 @@ hideCodeBtn2.addEventListener("click", () =>
 
 const clearCodeForm = document.getElementById("clear-code-form");
 clearCodeForm.setAttribute("action", `clear_codes/${lastId}/${titleName}`);
+
+const codesExpand = document.getElementById("show6");
+codesExpand.addEventListener("click", () => {
+  if (document.getElementById("codes-expand").classList == "fas fa-compress") {
+    document.querySelector(".flex-inner-card").style = "display:flex;";
+    document.getElementById("codes-container").style = "width:500px;";
+    document.getElementById("prev-next-1").style = "display:inherit;";
+    document.getElementById("prev-next-3").style = "display:none;";
+    document.getElementById("codes-expand").classList = "fas fa-expand";
+    for (
+      let i = 0;
+      i < document.querySelectorAll(".input-container").length;
+      i++
+    ) {
+      document.querySelectorAll(".input-container")[i].style =
+        "margin-left: 515px;";
+    }
+    document.getElementById("current").id = "current3";
+    document.getElementById("current1").id = "current";
+    document.getElementById("current").innerText = `${currentActiveCard + 1}/${
+      cardsEl.length
+    }`;
+    if (currentActiveCard >= 9 && currentActiveCard < 99) {
+      document.getElementById("prev-next-1").style =
+        "display:flex; flex-direction:column; margin: auto 26.5px";
+    }
+
+    if (currentActiveCard >= 99) {
+      document.getElementById("prev-next-1").style =
+        "display:flex; flex-direction:column; margin: auto 18.5px;";
+    }
+  } else {
+    document.querySelector(".flex-inner-card").style = "display:none;";
+    document.getElementById("codes-container").style = "width:1263px;";
+    document.getElementById("prev-next-1").style = "display:none;";
+    document.getElementById("prev-next-3").style =
+      "display:inherit; margin:20px;";
+    document.getElementById("codes-expand").classList = "fas fa-compress";
+    for (
+      let i = 0;
+      i < document.querySelectorAll(".input-container").length;
+      i++
+    ) {
+      document.querySelectorAll(".input-container")[i].style =
+        "margin-left: 1278px;";
+    }
+    document.getElementById("current").id = "current1";
+    document.getElementById("current3").id = "current";
+    document.getElementById("current").innerText = `${currentActiveCard + 1}/${
+      cardsEl.length
+    }`;
+  }
+});

@@ -9,7 +9,7 @@ const titleName = document
   .baseURI.split("/")
   .pop()
   .split("?")[1]
-  .replace("%20", " ");
+  .replaceAll("%20", " ");
 
 document.getElementById("title-name").innerText = titleName;
 
@@ -20,15 +20,3 @@ let currentActiveCard = document
   .split("?")[2];
 
 currentActiveCard = parseInt(currentActiveCard);
-
-let createCardForm = document.getElementById("create-card-form");
-console.log(currentActiveCard);
-console.log(document.getElementById("current").innerText);
-if (document.getElementById("current").innerText !== "") {
-  createCardForm.setAttribute(
-    "action",
-    `note/${lastId}/${titleName}/${currentActiveCard + 1}`
-  );
-} else {
-  createCardForm.setAttribute("action", `note/${lastId}/${titleName}/${0}`);
-}

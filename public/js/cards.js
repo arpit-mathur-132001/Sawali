@@ -275,8 +275,73 @@ if (currentActiveCard - 1 !== -1) {
   inputEl[currentActiveCard - 1].className = "input-container left";
 }
 
-if (currentActiveCard + 1 !== cardsEl.length) {
+if (currentActiveCard + 1 !== cardsEl.length && currentActiveCard !== 0) {
   cardsEl[currentActiveCard + 1].className = "card right";
   codesEl[currentActiveCard + 1].className = "code right";
   inputEl[currentActiveCard + 1].className = "input-container right";
 }
+
+let createCardForm = document.getElementById("create-card-form");
+console.log(document.getElementById("current").innerText);
+if (document.getElementById("current").innerText !== "") {
+  console.log("hi");
+  createCardForm.setAttribute(
+    "action",
+    `note/${lastId}/${titleName}/${currentActiveCard + 1}`
+  );
+} else {
+  console.log("hello");
+  createCardForm.setAttribute("action", `note/${lastId}/${titleName}/${0}`);
+}
+
+if (currentActiveCard >= 9 && currentActiveCard < 99) {
+  document.getElementById("prev-next-1").style =
+    "display:flex; flex-direction:column; margin: auto 26.5px";
+}
+
+if (currentActiveCard < 9) {
+  document.getElementById("prev-next-1").style =
+    "display:inherit; margin: auto 10px";
+}
+
+if (currentActiveCard >= 99) {
+  document.getElementById("prev-next-1").style =
+    "display:flex; flex-direction:column; margin: auto 18.5px;";
+}
+
+const cardsExpand = document.getElementById("show5");
+cardsExpand.addEventListener("click", () => {
+  if (document.getElementById("cards-expand").classList == "fas fa-compress") {
+    document.querySelector(".flex-inner-code").style = "display:flex;";
+    document.getElementById("cards-container").style = "width:661px;";
+    document.getElementById("prev-next-1").style = "display:inherit;";
+    document.getElementById("prev-next-2").style = "display:none;";
+    document.getElementById("cards-expand").classList = "fas fa-expand";
+    document.getElementById("current").id = "current2";
+    document.getElementById("current1").id = "current";
+    document.getElementById("current").innerText = `${currentActiveCard + 1}/${
+      cardsEl.length
+    }`;
+    if (currentActiveCard >= 9 && currentActiveCard < 99) {
+      document.getElementById("prev-next-1").style =
+        "display:flex; flex-direction:column; margin: auto 26.5px";
+    }
+
+    if (currentActiveCard >= 99) {
+      document.getElementById("prev-next-1").style =
+        "display:flex; flex-direction:column; margin: auto 18.5px;";
+    }
+  } else {
+    document.querySelector(".flex-inner-code").style = "display:none;";
+    document.getElementById("cards-container").style = "width:1420px;";
+    document.getElementById("prev-next-1").style = "display:none;";
+    document.getElementById("prev-next-2").style =
+      "display:inherit; margin:20px;";
+    document.getElementById("cards-expand").classList = "fas fa-compress";
+    document.getElementById("current").id = "current1";
+    document.getElementById("current2").id = "current";
+    document.getElementById("current").innerText = `${currentActiveCard + 1}/${
+      cardsEl.length
+    }`;
+  }
+});

@@ -214,6 +214,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: auto;
 }
 
 .top-card-nav {
@@ -274,6 +275,14 @@ div {
   margin-bottom: 10.6px;
 }
 
+#prev-next-2 {
+  display: none;
+}
+
+#prev-next-3 {
+  display: none;
+}
+
 /* .inner-code {
   cursor: pointer;
   height: 100%;
@@ -317,6 +326,20 @@ div {
 .inner-code-front {
   transform: rotateX(0deg);
   z-index: 2;
+}
+
+.input-container::after {
+  font-family: "Font Awesome 5 Free", Lato, sans-serif;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.input-container::after {
+  content: "Input";
 }
 
 .inner-code-back::after,
@@ -420,8 +443,6 @@ div {
 
 .main {
   margin: auto;
-  -webkit-text-stroke: 1px black;
-  color: white;
 }
 
 .flex-inner-card {
@@ -465,7 +486,7 @@ xmp::-webkit-scrollbar {
 }
 
 .titles {
-  height: 50%;
+  height: 46%;
   margin: 1%;
   padding: 3%;
   box-shadow: rgb(255 255 255 / 30%) 0px 1px 10px;
@@ -583,6 +604,14 @@ xmp::-webkit-scrollbar {
   transform: rotateX(180deg);
 }
 
+#show5 {
+  border: none;
+}
+
+#show6 {
+  border: none;
+}
+
 .code.show-answer .inner-code {
   transform: rotateX(180deg);
 }
@@ -622,6 +651,24 @@ xmp::-webkit-scrollbar {
   font-size: 14px;
   color: #999;
 }
+
+/* .inner-card-front::before,
+.inner-card-back::before {
+  font-family: "Font Awesome 5 Free", Lato, sans-serif;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #444;
+  width: 18px;
+  content: "🗖";
+}
+
+.inner-card-front:hover:before,
+.inner-card-back:hover:before {
+  color: #999;
+} */
 
 .inner-card-back::after {
   content: "\f021  Answer";

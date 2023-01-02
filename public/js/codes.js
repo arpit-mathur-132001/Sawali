@@ -132,8 +132,6 @@ const output = document.querySelector(".output");
 const languageSelect = document.querySelector("#language");
 let err;
 
-const proxy = "https://cors-anywhere.herokuapp.com/";
-
 function getData1() {
   let code = edit1.getValue();
   let input = textareaInput.value;
@@ -143,13 +141,9 @@ function getData1() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    clientId: "90418c7480bd066d156a178ee9a0c856",
-    clientSecret:
-      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
-    script: code,
+    code: code,
     language: language,
-    stdin: input,
-    versionIndex: "0",
+    input: input,
   });
 
   var requestOptions = {
@@ -159,14 +153,9 @@ function getData1() {
     redirect: "follow",
   };
 
-  fetch(proxy + "https://api.jdoodle.com/v1/execute", requestOptions)
+  fetch("https://api.codex.jaagrav.in", requestOptions)
     .then((response) => response.text())
-    .then(
-      (result) =>
-        (output.innerText = JSON.parse(result).output
-          ? JSON.parse(result).output
-          : JSON.parse(result).error)
-    )
+    .then((result) => (output.innerText = JSON.parse(result).output))
     .catch((error) => console.log("error", error));
 }
 
@@ -179,13 +168,9 @@ function getData2() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    clientId: "90418c7480bd066d156a178ee9a0c856",
-    clientSecret:
-      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
-    script: code,
+    code: code,
     language: language,
-    stdin: input,
-    versionIndex: "0",
+    input: input,
   });
 
   var requestOptions = {
@@ -195,14 +180,9 @@ function getData2() {
     redirect: "follow",
   };
 
-  fetch(proxy + "https://api.jdoodle.com/v1/execute", requestOptions)
+  fetch("https://api.codex.jaagrav.in", requestOptions)
     .then((response) => response.text())
-    .then(
-      (result) =>
-        (updateOutput.innerText = JSON.parse(result).output
-          ? JSON.parse(result).output
-          : JSON.parse(result).error)
-    )
+    .then((result) => (updateOutput.innerText = JSON.parse(result).output))
     .catch((error) => console.log("error", error));
 }
 
@@ -216,13 +196,9 @@ function saveData() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    clientId: "90418c7480bd066d156a178ee9a0c856",
-    clientSecret:
-      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
-    script: code,
+    code: code,
     language: language,
-    stdin: input,
-    versionIndex: "0",
+    input: input,
   });
 
   var requestOptions = {
@@ -232,17 +208,9 @@ function saveData() {
     redirect: "follow",
   };
 
-  const res = fetch(
-    proxy + "https://api.jdoodle.com/v1/execute",
-    requestOptions
-  )
+  const res = fetch("https://api.codex.jaagrav.in", requestOptions)
     .then((response) => response.text())
-    .then(
-      (result) =>
-        (output.innerText = JSON.parse(result).output
-          ? JSON.parse(result).output
-          : JSON.parse(result).error)
-    )
+    .then((result) => (output.innerText = JSON.parse(result).output))
     .catch((error) => console.log("error", error));
 
   res.then((output) => {
@@ -295,13 +263,9 @@ function saveUpdatedData() {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    clientId: "90418c7480bd066d156a178ee9a0c856",
-    clientSecret:
-      "caf0ef10d0a581757dca6b69a71973dff26c1f600e2a3cf3ba4d74dafbdfa0bb",
-    script: code,
+    code: code,
     language: language,
-    stdin: input,
-    versionIndex: "0",
+    input: input,
   });
 
   var requestOptions = {
@@ -311,17 +275,9 @@ function saveUpdatedData() {
     redirect: "follow",
   };
 
-  const res = fetch(
-    proxy + "https://api.jdoodle.com/v1/execute",
-    requestOptions
-  )
+  const res = fetch("https://api.codex.jaagrav.in", requestOptions)
     .then((response) => response.text())
-    .then(
-      (result) =>
-        (output.innerText = JSON.parse(result).output
-          ? JSON.parse(result).output
-          : JSON.parse(result).error)
-    )
+    .then((result) => (output.innerText = JSON.parse(result).output))
     .catch((error) => console.log("error", error));
 
   res.then((output) => {

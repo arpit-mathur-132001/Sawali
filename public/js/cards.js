@@ -220,6 +220,17 @@ addCard.addEventListener("click", () => {
 //   }
 // });
 
+// Add card
+
+// function Card() {
+//   console.log(notes.length);
+//   console.log(currentActiveCard);
+//   if (currentActiveCard !== notes.length - 1) {
+//   }
+//   let form = document.getElementById("create-card-form");
+//   form.submit();
+// }
+
 // Delete card
 function proceed() {
   let form = document.getElementById("deleteForm");

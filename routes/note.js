@@ -12,10 +12,14 @@ router.post("/:id/:titleName/:activeCard", async (req, res) => {
   const title = req.params["id"];
   const titleName = req.params["titleName"];
   const activeCard = req.params["activeCard"];
+  const index = Number(activeCard);
+  const id = req.params["id"];
+
   try {
     const note = new Notes({
       question,
       answer,
+      index,
       user,
       title,
       date: new Date(),
